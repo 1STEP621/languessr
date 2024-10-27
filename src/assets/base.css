@@ -1,0 +1,67 @@
+:root {
+  --c-bg: #1a1a1a;
+  --c-text: #f0f0f0;
+  --c-text-weaker: #888888;
+  --c-panel: #252525;
+  --c-panel-hover: #2c2c2c;
+  --c-divider: #272727;
+  --c-primary: #ff7900;
+
+  --text-size: 15px;
+  --small-text-size: 13px;
+  --h1-size: 30px;
+  --h2-size: 24px;
+  --h3-size: 20px;
+  --h4-size: 18px;
+  --h5-size: 16px;
+  --h6-size: 15px;
+
+  --main-width: 750px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--c-text);
+  background: var(--c-bg);
+  line-height: 1.6;
+  font-family: Inter, "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: var(--text-size);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  touch-action: none;
+}
+
+#app {
+  overflow: hidden;
+  position: relative;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+  color: var(--c-text);
+}
+
+input {
+  background-color: transparent;
+  border: transparent;
+  outline: transparent;
+  font-family: Inter, "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-size: var(--text-size);
+  color: var(--c-text);
+  accent-color: var(--c-primary);
+}
