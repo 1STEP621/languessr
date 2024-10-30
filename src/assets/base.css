@@ -5,7 +5,9 @@
   --c-panel: #252525;
   --c-panel-hover: #2c2c2c;
   --c-divider: #272727;
-  --c-primary: #ff7900;
+  --c-primary: rgb(0, 174, 197);
+
+  --font: "Inter", "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
 
   --text-size: 15px;
   --small-text-size: 13px;
@@ -32,7 +34,7 @@ body {
   color: var(--c-text);
   background: var(--c-bg);
   line-height: 1.6;
-  font-family: "Inter", "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-family: var(--font);
   font-size: var(--text-size);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -64,7 +66,7 @@ input {
   background-color: transparent;
   border: transparent;
   outline: transparent;
-  font-family: Inter, "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  font-family: var(--font);
   font-size: var(--text-size);
   color: var(--c-text);
   accent-color: var(--c-primary);

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { bundledLanguages, codeToHtml, createHighlighter, type BundledLanguage, type BundledTheme, type HighlighterGeneric } from 'shiki';
-import { onMounted, ref } from 'vue';
+import { bundledLanguages, createHighlighter, type BundledLanguage, type BundledTheme, type HighlighterGeneric } from 'shiki';
+import { onMounted, ref, watch } from 'vue';
+import Button from './assets/components/Button.vue';
 
 const quizzes = ["helloworld", "fizzbuzz"];
 type Quiz = typeof quizzes[number];
@@ -56,9 +57,23 @@ const highlightableLangs = langs.filter(e => Object.keys(bundledLanguages).inclu
 const quizDuration = 5000;
 
 const codeHtml = ref(undefined as string | undefined);
+const choices = ref([] as Lang[]);
+const ans = ref(undefined as string | undefined);
 const highlighter = ref(undefined as HighlighterGeneric<BundledLanguage, BundledTheme> | undefined);
 const lastTime = ref(0);
 const now = ref(0);
+
+const newQuiz = async () => {
+  const quiz = getRandom(quizzes);
+  const lang = getRandom(availableLangs[quiz]);
+  lastTime.value = Date.now();
+  codeHtml.value = highlighter.value?.codeToHtml((await import(`./assets/quizzes/${quiz}/${lang}.${langExtensions[lang]}?raw`)).default, {
+    lang: highlightableLangs.find(e => e === lang) ?? "text",
+    theme: "one-dark-pro",
+  });
+  choices.value = shuffle([...shuffle(availableLangs[quiz].filter(e => e !== lang)).slice(0, 4), lang]);
+  ans.value = lang;
+}
 
 setInterval(() => now.value = Date.now(), 15);
 
@@ -67,23 +82,32 @@ onMounted(async () => {
     langs: highlightableLangs,
     themes: ["one-dark-pro"],
   })
-
-  const newQuiz = async () => {
-    const quiz = getRandom(quizzes);
-    const lang = getRandom(availableLangs[quiz]);
-    lastTime.value = Date.now();
-    codeHtml.value = highlighter.value?.codeToHtml((await import(`./assets/quizzes/${quiz}/${lang}.${langExtensions[lang]}?raw`)).default, {
-      lang: highlightableLangs.find(e => e === lang) ?? "text",
-      theme: "one-dark-pro",
-    })
-  }
-  setInterval(newQuiz, quizDuration);
   newQuiz();
+})
+
+function answer(choice: Lang) {
+  if (choice === ans.value) {
+    newQuiz();
+  }
+}
+
+watch(() => now.value, () => {
+  if (now.value - lastTime.value > quizDuration) {
+    newQuiz();
+  }
 })
 
 // [min, max)
 function randomBetween(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
+}
+
+function shuffle<T>(arr: T[]) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = randomBetween(0, i + 1);
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 function getRandom<T>(arr: T[]) {
@@ -95,6 +119,11 @@ function getRandom<T>(arr: T[]) {
   <main :class="$style.root">
     <div :class="$style.progressBar" :style="{ width: `${100 - (now - lastTime) / quizDuration * 100}%` }"></div>
     <div :class="$style.code" v-html="codeHtml"></div>
+    <div :class="$style.choices">
+      <Button v-for="choice in choices" :key="choice" @click="answer(choice)">
+        {{ langPretty[choice] }}
+      </Button>
+    </div>
   </main>
 </template>
 
@@ -103,6 +132,7 @@ function getRandom<T>(arr: T[]) {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100dvh;
 }
 
@@ -111,14 +141,21 @@ function getRandom<T>(arr: T[]) {
   top: 0;
   left: 0;
   height: 5px;
-  background-color: rgb(0, 174, 197);
+  background-color: var(--c-primary);
 }
 
 .code pre {
+  font-size: 18px;
   border-radius: 10px;
   padding: 20px;
   max-width: 70vw;
   word-break: break-all;
   overflow-wrap: anywhere;
+}
+
+.choices {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 }
 </style>
