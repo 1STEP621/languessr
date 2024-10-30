@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "shiki": "^1.22.2",
     "vue": "^3.5.12"
   },
   "devDependencies": {
