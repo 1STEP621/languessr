@@ -44,16 +44,7 @@ body {
 }
 
 code, pre {
-  font-family: "Roboto Mono";
-}
-
-#app {
-  overflow: hidden;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  font-family: "Roboto Mono", monospace;
 }
 
 button {
