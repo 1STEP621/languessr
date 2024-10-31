@@ -1,4 +1,12 @@
-void main() {
+import { Language } from "./base";
+
+export default class DartLanguage extends Language {
+  public constructor() {
+    super({
+      displayName: "Dart",
+      highlightType: "dart",
+      programs: [
+`void main() {
   List.generate(100, (idx_) {
     var idx = idx_ + 1;
     if (idx % 3 == 0 && idx % 5 == 0) {
@@ -11,4 +19,8 @@ void main() {
       return idx;
     }
   }).forEach(print);
+}`
+      ]
+    })
+  }
 }

@@ -1,4 +1,17 @@
-#include <iostream>
+import { Language } from "./base";
+
+export default class CppLanguage extends Language {
+  public constructor() {
+    super({
+      displayName: "C++",
+      highlightType: "c++",
+      programs: [
+`#include <iostream>
+
+void main() {
+  std::cout << "Hello, World!" << std::endl;
+}`,
+`#include <iostream>
 
 void main() {
   for (int i = 1; i <= 100; i++) {
@@ -11,5 +24,9 @@ void main() {
     } else {
       std::cout << i << std::endl;
     }
+  }
+}`
+      ]
+    })
   }
 }

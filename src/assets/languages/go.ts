@@ -1,4 +1,19 @@
-package main
+import { Language } from "./base";
+
+export default class GoLanguage extends Language {
+  public constructor() {
+    super({
+      displayName: "Go",
+      highlightType: "go",
+      programs: [
+`package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, world!")
+}`,
+`package main
 
 import "fmt"
 
@@ -14,4 +29,8 @@ func main() {
             fmt.Println(i)
         }
     }
+}`
+      ]
+    })
+  }
 }

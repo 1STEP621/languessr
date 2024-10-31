@@ -1,22 +1,20 @@
 <script lang="ts" setup>
-import { highlightableLangs, type Lang, type Quiz } from '@/languages';
 import { useHighlighterStore } from '@/stores/highlighter';
 import { onMounted, ref } from 'vue';
+import type { Language } from '../languages/base';
+import { pickArrayByRandom } from '@/utils/random';
 
 const props = defineProps<{
-  quiz: Quiz;
-  lang: Lang;
-  // TODO: なんとか型付けする
-  extension: string;
+  language: Language;
 }>();
 const htmlRef = ref<string>();
 
 const highlighter = await useHighlighterStore().promise;
-const codeText = (await import(`../quizzes/${props.quiz}/${props.lang}.${props.extension}?raw`)).default;
 
 onMounted(() => {
-  htmlRef.value = highlighter.codeToHtml(codeText, {
-    lang: highlightableLangs.find(e => e === props.lang) ?? "text",
+  const language = props.language;
+  htmlRef.value = highlighter.codeToHtml(pickArrayByRandom(language.programs), {
+    lang: language.highlightType ?? "text",
     theme: highlighter.getLoadedThemes()[0],
   });
 });

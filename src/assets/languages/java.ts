@@ -1,4 +1,18 @@
-class Main {
+import { Language } from "./base";
+
+export default class JavaLanguage extends Language {
+  public constructor() {
+    super({
+      displayName: "Java",
+      highlightType: "java",
+      programs: [
+        `class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+    }
+}
+`,
+        `class Main {
     public static void main(String[] args) {
         for (int i = 1; i <= 100; i++) {
             if (i % 15 == 0) {
@@ -12,4 +26,8 @@ class Main {
             }
         }
     }
+}`
+      ]
+    })
+  }
 }

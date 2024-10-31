@@ -1,4 +1,19 @@
-using System;
+import { Language } from "./base";
+
+export default class CsharpLanguage extends Language {
+  public constructor() {
+    super({
+      displayName: "C#",
+      highlightType: "c#",
+      programs: [
+        `using System;
+
+class Main {
+    static void Main() {
+        Console.WriteLine("Hello, world!");
+    }
+}`,
+        `using System;
 
 class Program {
     static void Main() {
@@ -22,4 +37,9 @@ class Program {
             }
         }
     }
+}
+`
+      ]
+    })
+  }
 }

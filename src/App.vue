@@ -1,32 +1,34 @@
 <script setup lang="ts">
-import { type BundledLanguage, type BundledTheme, type HighlighterGeneric } from 'shiki';
-import { onMounted, ref, watch, type Component } from 'vue';
+import { ref, watch } from 'vue';
 import Code from './assets/components/Code.vue';
 import Button from './assets/components/Button.vue';
 import { pickArrayByRandom, shuffleArray } from './utils/random';
-import { availableLangs, type Lang, langPretty, quizzes } from './languages';
+import Languages from './languages';
+import type { Language } from './assets/languages/base';
 
 const quizDuration = 5000;
 
-const choices = ref([] as Lang[]);
-const ans = ref(undefined as string | undefined);
 const lastTime = ref(0);
 const now = ref(0);
+const languageRef = ref<Language>(Languages[0]);
+const choicesRef = ref<Language[]>([]);
 
 const newQuiz = async () => {
-  const quiz = pickArrayByRandom(quizzes);
-  const lang = pickArrayByRandom(availableLangs[quiz]);
+  const language = pickArrayByRandom(Languages);
+  const choices = shuffleArray([...shuffleArray([...Languages]).slice(0, 4), language]);
+
+  languageRef.value = language;
+  choicesRef.value = choices;
+
   lastTime.value = Date.now();
-  choices.value = shuffleArray([...shuffleArray(availableLangs[quiz].filter(e => e !== lang)).slice(0, 4), lang]);
-  ans.value = lang;
 }
 
 setInterval(() => now.value = Date.now(), 15);
 
-onMounted(newQuiz);
+newQuiz();
 
-function answer(choice: Lang) {
-  if (choice === ans.value) {
+function answer(choiced: Language) {
+  if (choiced === languageRef.value) {
     newQuiz();
   }
 }
@@ -42,14 +44,14 @@ watch(() => now.value, () => {
   <main :class="$style.root">
     <div :class="$style.progressBar" :style="{ width: `${100 - (now - lastTime) / quizDuration * 100}%` }"></div>
     <Suspense>
-      <Code quiz="fizzbuzz" lang="bash" extension="bash" />
+      <Code :language="languageRef" />
       <template #fallback>
         aaa
       </template>
     </Suspense>
     <div :class="$style.choices">
-      <Button v-for="choice in choices" :key="choice" @click="answer(choice)">
-        {{ langPretty[choice] }}
+      <Button v-for="choice in choicesRef" :key="choice.displayName" @click="answer(choice)">
+        {{ choice.displayName }}
       </Button>
     </div>
   </main>

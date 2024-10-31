@@ -22,7 +22,12 @@ export function shuffleArray<T>(arr: T[]) {
 /**
  * `arr` からランダムな要素を取得します。
  * @param arr 対象の配列
+ * @param ignore 除外する要素
  */
-export function pickArrayByRandom<T>(arr: T[]) {
-  return arr[getRandomBetween(0, arr.length)];
+export function pickArrayByRandom<T>(arr: T[], ignore: T[] = []) {
+  let result;
+  while (!result || ignore.includes(result)) {
+    result = arr[getRandomBetween(0, arr.length)];
+  }
+  return result;
 }
