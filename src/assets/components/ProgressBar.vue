@@ -5,7 +5,7 @@ const width = ref("100%");
 let duration = 0;
 let startTime = 0;
 
-defineEmits<{
+const emit = defineEmits<{
   timeout: [void];
 }>();
 defineExpose({
@@ -23,8 +23,11 @@ defineExpose({
 function frame(timestamp: number) {
   width.value = `${100 - (timestamp - startTime) / duration * 100}%`;
 
-  if (startTime + duration > timestamp)
+  if (startTime + duration > timestamp) {
     requestAnimationFrame(frame);
+  } else {
+    emit("timeout");
+  }
 }
 
 </script>
