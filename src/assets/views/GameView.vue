@@ -37,11 +37,12 @@ onMounted(newQuiz);
 
 <template>
   <BaseView :class="$style.view">
-    <ProgressBar ref="progressRef" @timeout="newQuiz" />
     <Suspense>
-      <Code :language="languageRef" />
+      <Code :language="languageRef" :class="$style.code" />
       <template #fallback>
-        <Loader />
+        <div :class="$style.code">
+          <Loader />
+        </div>
       </template>
     </Suspense>
     <ButtonGrid>
@@ -49,15 +50,46 @@ onMounted(newQuiz);
         {{ choice.displayName }}
       </Button>
     </ButtonGrid>
+    <ProgressBar ref="progressRef" @timeout="newQuiz" />
   </BaseView>
 </template>
 
 <style module>
 .view {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100dvh;
+  gap: 2em;
+
+  height: 100%;
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 1;
+  overflow: hidden;
+
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 10%;
+    background: linear-gradient(to bottom, var(--c-bg), transparent);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    height: 10%;
+    background: linear-gradient(to top, var(--c-bg), transparent);
+  }
 }
 </style>
