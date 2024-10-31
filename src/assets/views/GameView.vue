@@ -8,6 +8,7 @@ import Code from '@/assets/components/Code.vue';
 import Button from '@/assets/components/Button.vue';
 import ProgressBar from '@/assets/components/ProgressBar.vue';
 import Loader from '@/assets/components/Loader.vue';
+import ButtonGrid from '@/assets/components/ButtonGrid.vue';
 
 const quizDuration = 5000;
 const choiceCount = 4;
@@ -43,11 +44,11 @@ onMounted(newQuiz);
         <Loader />
       </template>
     </Suspense>
-    <div :class="$style.choices">
+    <ButtonGrid>
       <Button v-for="choice in choicesRef" :key="choice.displayName" @click="answer(choice)">
         {{ choice.displayName }}
       </Button>
-    </div>
+    </ButtonGrid>
   </BaseView>
 </template>
 
@@ -58,11 +59,5 @@ onMounted(newQuiz);
   align-items: center;
   flex-direction: column;
   height: 100dvh;
-}
-
-.choices {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
 }
 </style>
