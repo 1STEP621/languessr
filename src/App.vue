@@ -1,32 +1,27 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import Code from './assets/components/Code.vue';
 import Button from './assets/components/Button.vue';
 import { pickArrayByRandom, shuffleArray } from './utils/random';
 import Languages from './languages';
 import type { Language } from './assets/languages/base';
+import ProgressBar from './assets/components/ProgressBar.vue';
 
 const quizDuration = 5000;
 const choiceCount = 4;
 
-const lastTime = ref(0);
-const now = ref(0);
+const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
 
 const newQuiz = async () => {
   const language = pickArrayByRandom(Languages);
   const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, choiceCount - 1), language]);
-
   languageRef.value = language;
   choicesRef.value = choices;
 
-  lastTime.value = Date.now();
+  progressRef.value?.startCountdown(quizDuration);
 }
-
-setInterval(() => now.value = Date.now(), 15);
-
-newQuiz();
 
 function answer(choiced: Language) {
   if (choiced === languageRef.value) {
@@ -34,16 +29,12 @@ function answer(choiced: Language) {
   }
 }
 
-watch(() => now.value, () => {
-  if (now.value - lastTime.value > quizDuration) {
-    newQuiz();
-  }
-})
+onMounted(newQuiz);
 </script>
 
 <template>
   <main :class="$style.root">
-    <div :class="$style.progressBar" :style="{ width: `${100 - (now - lastTime) / quizDuration * 100}%` }"></div>
+    <ProgressBar ref="progressRef" @timeout="newQuiz" />
     <Suspense>
       <Code :language="languageRef" />
       <template #fallback>
@@ -65,14 +56,6 @@ watch(() => now.value, () => {
   align-items: center;
   flex-direction: column;
   height: 100dvh;
-}
-
-.progressBar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  background-color: var(--c-primary);
 }
 
 .choices {
