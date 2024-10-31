@@ -7,8 +7,7 @@ defineProps<{
 }>();
 </script>
 <template>
-  <button type="button" :class="$style.button" @click="emit('click')" :disabled="disabled"
-    :style="{ cursor: disabled ? 'default' : 'pointer' }">
+  <button type="button" :class="$style.button" @click="emit('click')" :disabled>
     <slot />
   </button>
 </template>
@@ -26,9 +25,14 @@ defineProps<{
   padding: 10px;
   font-size: 15px;
   font-weight: bold;
+  cursor: pointer;
 }
 
-.button:hover {
+.button:not(:disabled):hover {
   background-color: var(--c-panel-hover);
+}
+.button:disabled {
+  cursor: default;
+  opacity: 0.6;
 }
 </style>
