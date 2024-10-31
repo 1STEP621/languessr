@@ -7,6 +7,7 @@ import Languages from './languages';
 import type { Language } from './assets/languages/base';
 
 const quizDuration = 5000;
+const choiceCount = 4;
 
 const lastTime = ref(0);
 const now = ref(0);
@@ -15,7 +16,7 @@ const choicesRef = ref<Language[]>([]);
 
 const newQuiz = async () => {
   const language = pickArrayByRandom(Languages);
-  const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 4), language]);
+  const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, choiceCount - 1), language]);
 
   languageRef.value = language;
   choicesRef.value = choices;
