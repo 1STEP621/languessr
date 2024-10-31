@@ -6,6 +6,7 @@ import { pickArrayByRandom, shuffleArray } from './utils/random';
 import Languages from './languages';
 import type { Language } from './assets/languages/base';
 import ProgressBar from './assets/components/ProgressBar.vue';
+import Loader from './assets/components/Loader.vue';
 
 const quizDuration = 5000;
 const choiceCount = 4;
@@ -38,7 +39,7 @@ onMounted(newQuiz);
     <Suspense>
       <Code :language="languageRef" />
       <template #fallback>
-        aaa
+        <Loader />
       </template>
     </Suspense>
     <div :class="$style.choices">
