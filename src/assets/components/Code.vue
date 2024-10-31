@@ -35,5 +35,6 @@ watch(() => props.language, renderText);
   max-width: 70vw;
   word-break: break-all;
   overflow-wrap: anywhere;
+  text-wrap: wrap;
 }
 </style>
