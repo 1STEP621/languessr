@@ -7,7 +7,7 @@ defineProps<{
 }>();
 </script>
 <template>
-  <button :class="$style.button" @click="emit('click')" :disabled="disabled"
+  <button type="button" :class="$style.button" @click="emit('click')" :disabled="disabled"
     :style="{ cursor: disabled ? 'default' : 'pointer' }">
     <slot />
   </button>
