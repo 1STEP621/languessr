@@ -2,6 +2,7 @@
 import { bundledLanguages, createHighlighter, type BundledLanguage, type BundledTheme, type HighlighterGeneric } from 'shiki';
 import { onMounted, ref, watch } from 'vue';
 import Button from './assets/components/Button.vue';
+import { pickArrayByRandom, shuffleArray } from './utils/random';
 
 const quizzes = ["helloworld", "fizzbuzz"];
 type Quiz = typeof quizzes[number];
@@ -64,14 +65,14 @@ const lastTime = ref(0);
 const now = ref(0);
 
 const newQuiz = async () => {
-  const quiz = getRandom(quizzes);
-  const lang = getRandom(availableLangs[quiz]);
+  const quiz = pickArrayByRandom(quizzes);
+  const lang = pickArrayByRandom(availableLangs[quiz]);
   lastTime.value = Date.now();
   codeHtml.value = highlighter.value?.codeToHtml((await import(`./assets/quizzes/${quiz}/${lang}.${langExtensions[lang]}?raw`)).default, {
     lang: highlightableLangs.find(e => e === lang) ?? "text",
     theme: "one-dark-pro",
   });
-  choices.value = shuffle([...shuffle(availableLangs[quiz].filter(e => e !== lang)).slice(0, 4), lang]);
+  choices.value = shuffleArray([...shuffleArray(availableLangs[quiz].filter(e => e !== lang)).slice(0, 4), lang]);
   ans.value = lang;
 }
 
@@ -96,23 +97,6 @@ watch(() => now.value, () => {
     newQuiz();
   }
 })
-
-// [min, max)
-function randomBetween(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-function shuffle<T>(arr: T[]) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = randomBetween(0, i + 1);
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-function getRandom<T>(arr: T[]) {
-  return arr[randomBetween(0, arr.length)];
-}
 </script>
 
 <template>
