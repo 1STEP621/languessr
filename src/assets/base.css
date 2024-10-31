@@ -1,10 +1,10 @@
 :root {
   --c-bg: #1a1a1a;
   --c-text: #f0f0f0;
-  --c-text-weaker: #888888;
-  --c-panel: #252525;
-  --c-panel-hover: #2c2c2c;
-  --c-divider: #272727;
+  --c-text-weaker: #808080;
+  --c-panel: #80808030;
+  --c-panel-hover: #80808050;
+  --c-divider: #80808080;
   --c-primary: rgb(0, 174, 197);
 
   --font: "Inter", "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
