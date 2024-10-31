@@ -7,9 +7,13 @@ import Languages from './languages';
 import type { Language } from './assets/languages/base';
 import ProgressBar from './assets/components/ProgressBar.vue';
 import Loader from './assets/components/Loader.vue';
+import { useViewStore } from './stores/view';
+import DisconnectedView from './assets/views/DisconnectedView.vue';
 
 const quizDuration = 5000;
 const choiceCount = 4;
+
+const view = useViewStore();
 
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
@@ -48,6 +52,9 @@ onMounted(newQuiz);
       </Button>
     </div>
   </main>
+
+  <!-- TODO: View（main要素）は通常画面に1つしか存在しない -->
+  <DisconnectedView v-if="view.state === 'disconnected'" />
 </template>
 
 <style module>
