@@ -15,7 +15,7 @@ const choicesRef = ref<Language[]>([]);
 
 const newQuiz = async () => {
   const language = pickArrayByRandom(Languages);
-  const choices = shuffleArray([...shuffleArray([...Languages]).slice(0, 4), language]);
+  const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 4), language]);
 
   languageRef.value = language;
   choicesRef.value = choices;
