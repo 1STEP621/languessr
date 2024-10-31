@@ -49,7 +49,11 @@ code, pre {
 
 #app {
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 
 button {
