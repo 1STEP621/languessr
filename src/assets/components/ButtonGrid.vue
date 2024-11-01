@@ -9,7 +9,6 @@
 .grid {
   display: grid;
   gap: 1em;
-  margin-top: 2em;
 
   button {
     width: 12em;
