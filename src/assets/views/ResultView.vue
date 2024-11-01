@@ -16,13 +16,13 @@ const jsConfetti = new JSConfetti();
 let rank: 'S' | 'A' | 'B' | 'C';
 
 switch (true) {
-  case game.score >= 500:
+  case game.score >= 300:
     rank = 'S';
     break;
-  case game.score >= 300:
+  case game.score >= 150:
     rank = 'A';
     break;
-  case game.score >= 100:
+  case game.score >= 50:
     rank = 'B';
     break;
   default:
