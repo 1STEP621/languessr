@@ -4,6 +4,7 @@ import BrainfuckLanguage from "./assets/languages/brainfuck";
 import CppLanguage from "./assets/languages/cpp";
 import CsharpLanguage from "./assets/languages/csharp";
 import DartLanguage from "./assets/languages/dart";
+import FishLanguage from "./assets/languages/fish";
 import GoLanguage from "./assets/languages/go";
 import HaxeLanguage from "./assets/languages/haxe";
 import JavaLanguage from "./assets/languages/java";
@@ -25,6 +26,7 @@ export default [
   CppLanguage,
   CsharpLanguage,
   DartLanguage,
+  FishLanguage,
   GoLanguage,
   HaxeLanguage,
   JavaLanguage,
