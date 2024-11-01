@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { pickArrayByRandom, shuffleArray } from '@/utils/random';
+import { pickArrayByRandom as pickElementByRandom, shuffleArray } from '@/utils/random';
 import Languages from '../../languages';
 import type { Language } from '../languages/base';
 import BaseView from './BaseView.vue';
@@ -32,13 +32,13 @@ let prevLanguage: Language;
 let isAlreadyMissed = false;
 
 const newHint = () => {
-  hintRef.value = pickArrayByRandom(languageRef.value.hints);
+  hintRef.value = pickElementByRandom(languageRef.value.hints);
 }
 
 const newQuiz = async () => {
   isAlreadyMissed = false;
 
-  const language = pickArrayByRandom(Languages, [prevLanguage]);
+  const language = pickElementByRandom(Languages, [prevLanguage]);
   const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 3), language]);
   languageRef.value = language;
   choicesRef.value = choices;
