@@ -14,7 +14,7 @@ function withResolvers<T>() {
   };
 }
 
-export type KeyType = "up" | "left" | "right" | "down";
+export type KeyType = "up" | "left" | "right" | "down" | "a";
 
 export const useInputStore = defineStore("input", () => {
   const eventTarget = new EventTarget();

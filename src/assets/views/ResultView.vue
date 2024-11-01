@@ -37,10 +37,7 @@ onMounted(() => {
 
   setTimeout(() => {
     if (view.state === "result") {
-      input.addEventListener("up", () => restart(), { view: "result" });
-      input.addEventListener("right", () => restart(), { view: "result" });
-      input.addEventListener("down", () => restart(), { view: "result" });
-      input.addEventListener("left", () => restart(), { view: "result" });
+      input.addEventListener("a", () => restart(), { view: "result" });
     }
   }, 1000);
 });
@@ -60,8 +57,7 @@ function restart() {
       <span>ランク</span>
       <span :class="[$style.rank, $style[`rank${rank}`]]">{{ rank }}</span>
     </div>
-    <Button :class="$style.restart" @click="restart">タイトルに戻る</Button>
-    <p>いずれかのキーを押すことでもタイトルに戻れます。</p>
+    <Button :class="$style.restart" @click="restart">決定キーを押してタイトルに戻る</Button>
   </BaseView>
 </template>
 
