@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Button from '../components/Button.vue';
 import BaseView from './BaseView.vue';
-import { useViewStore } from '../../stores/view';
+import { useViewStore } from '@/stores/view';
 
 const view = useViewStore();
 </script>
