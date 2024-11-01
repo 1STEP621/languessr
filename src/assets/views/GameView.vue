@@ -64,10 +64,12 @@ function answer(choiced: Language) {
   const isCorrect = choiced === languageRef.value;
 
   if (isCorrect) {
+    correct.currentTime = 0;
     correct.play();
     game.score += Math.round(1000 * 50 / (performance.now() - quizStartTime));
     newQuiz();
   } else {
+    incorrect.currentTime = 0;
     incorrect.play();
     if (!isAlreadyMissed) {
       game.score -= 10;
