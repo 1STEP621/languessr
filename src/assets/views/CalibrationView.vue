@@ -38,7 +38,7 @@ onMounted(async () => {
   input.keys.set(definedKeys[1].value!, "down");
   input.keys.set(definedKeys[2].value!, "left");
   input.keys.set(definedKeys[3].value!, "right");
-  progressBarRef.value?.startCountdown(5000);
+  progressBarRef.value?.startCountdown(3000);
 });
 
 function getKeyNameFromIndex(index: number) {
