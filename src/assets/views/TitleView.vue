@@ -1,9 +1,16 @@
 <script lang="ts" setup>
+import { onMounted } from 'vue';
 import Button from '../components/Button.vue';
 import BaseView from './BaseView.vue';
 import { useViewStore } from '@/stores/view';
+import { useInputStore } from '@/stores/input';
 
 const view = useViewStore();
+const input = useInputStore();
+
+onMounted(() => {
+  input.addEventListener("a", () => view.state = "countdown", { view: "title" });
+});
 </script>
 
 <template>
@@ -12,7 +19,7 @@ const view = useViewStore();
       <img :class="$style.icon" src="/icon.svg" alt="logo" />
       <h1 :class="$style.title">Languessr</h1>
     </div>
-    <Button :class="$style.start" @click="view.state = 'countdown'">スタート</Button>
+    <Button :class="$style.start" @click="view.state = 'countdown'">決定キーでスタート</Button>
   </BaseView>
 </template>
 
