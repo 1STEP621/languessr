@@ -90,8 +90,7 @@ function answer(choiced: Language) {
     });
 
     // NOTE: 初心者用にしてたけど、連打すると大変なことになるので
-    // TODO: 難易度でここを切り替えられるようにするべき？
-    if (!isAlreadyMissed || true) {
+    if (!isAlreadyMissed || ["hard", "normal"].includes(game.difficulty)) {
       game.score -= 10;
       game.score = Math.max(0, game.score);
     }
@@ -125,7 +124,7 @@ onMounted(() => {
     <div :class="$style.score">
       Score: <span>{{ game.score }}</span>
     </div>
-    <span :class="$style.hint">Tips: {{ hintRef }}</span>
+    <span v-if="['easy', 'normal'].includes(game.difficulty)" :class="$style.hint">Tips: {{ hintRef }}</span>
     <Suspense>
       <Code :language="languageRef" :class="$style.code" />
       <template #fallback>

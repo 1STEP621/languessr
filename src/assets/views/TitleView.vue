@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { onMounted } from 'vue';
+import { useGameStore } from '@/stores/game';
 import Button from '../components/Button.vue';
 import BaseView from './BaseView.vue';
 import { useViewStore } from '@/stores/view';
@@ -11,6 +12,7 @@ const input = useInputStore();
 onMounted(() => {
   input.addEventListener("a", () => view.state = "countdown", { view: "title" });
 });
+const game = useGameStore();
 </script>
 
 <template>
@@ -18,6 +20,11 @@ onMounted(() => {
     <div :class="$style.titleGroup">
       <img :class="$style.icon" src="/icon.svg" alt="logo" />
       <h1 :class="$style.title">Languessr</h1>
+    </div>
+    <div>
+      <Button :class="$style.easy" @click="game.difficulty = 'easy'">かんたん</Button>
+      <Button :class="$style.normal" @click="game.difficulty = 'normal'">ふつう</Button>
+      <Button :class="$style.hard" @click="game.difficulty = 'hard'">むずかしい</Button>
     </div>
     <Button :class="$style.start" @click="view.state = 'countdown'">決定キーでスタート</Button>
   </BaseView>
