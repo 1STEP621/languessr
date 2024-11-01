@@ -30,6 +30,10 @@ onMounted(async () => {
   }
 
   // NOTE: 設定完了
+  input.keys.set(definedKeys[0].value!, "up");
+  input.keys.set(definedKeys[2].value!, "down");
+  input.keys.set(definedKeys[3].value!, "left");
+  input.keys.set(definedKeys[1].value!, "right");
   progressBarRef.value?.startCountdown(5000);
 });
 

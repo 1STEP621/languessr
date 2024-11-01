@@ -1,6 +1,8 @@
 import { defineStore } from "pinia"
 import { ref } from "vue";
 
+export type ViewType = ReturnType<typeof useViewStore>["state"];
+
 export const useViewStore = defineStore("view", () => {
   const state = ref<"calibration" | "title" | "game" | "result" | "disconnected">("calibration");
 

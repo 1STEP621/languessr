@@ -1,12 +1,6 @@
 import { defineStore } from "pinia"
 import { ref } from "vue";
-
-interface InputStoreEventMap {
-  "top": {};
-  "bottom": {};
-  "left": {};
-  "right": {};
-}
+import { useViewStore, type ViewType } from "./view";
 
 function withResolvers<T>() {
   let resolve: (value: T | PromiseLike<T>) => void;
@@ -20,15 +14,27 @@ function withResolvers<T>() {
   };
 }
 
+export type KeyType = "up" | "left" | "right" | "down";
+
 export const useInputStore = defineStore("input", () => {
+  const eventTarget = new EventTarget();
+  const view = useViewStore();
+
   let resolvers = withResolvers<string>();
   let pressedButtons = new Set<string>();
+  let keys = new Map<string, KeyType>();
+
+  function press(value: string) {
+    // NOTE: Promise の解決（生のキー入力）
+    resolvers.resolve(value);
+    resolvers = withResolvers<string>();
+
+    // NOTE: キーイベントを発生（整理されたキー入力）
+    if (keys.get(value)) eventTarget.dispatchEvent(new Event(keys.get(value)!));
+  }
 
   // NOTE: キーの検知
-  addEventListener("keydown", evt => {
-    resolvers.resolve(evt.key);
-    resolvers = withResolvers<string>();
-  });
+  addEventListener("keydown", evt => press(evt.key));
 
   // NOTE: ゲームパッドの検知
   function frame() {
@@ -42,8 +48,7 @@ export const useInputStore = defineStore("input", () => {
 
         if (button.touched) {
           if (!pressedButtons.has(id)) {
-            resolvers.resolve(id);
-            resolvers = withResolvers<string>();
+            press(id);
             pressedButtons.add(id);
           }
         } else {
@@ -58,6 +63,14 @@ export const useInputStore = defineStore("input", () => {
   return {
     async wait(): Promise<string> {
       return resolvers.promise;
+    },
+    keys,
+    addEventListener(type: KeyType, listener: () => void, condition: { view: ViewType; }) {
+      eventTarget.addEventListener(type, () => {
+        if (view.state === condition.view) {
+          listener();
+        }
+      });
     }
   };
 });
