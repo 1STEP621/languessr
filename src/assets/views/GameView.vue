@@ -71,7 +71,10 @@ function answer(choiced: Language) {
   } else {
     incorrect.currentTime = 0;
     incorrect.play();
-    if (!isAlreadyMissed) {
+
+    // NOTE: 初心者用にしてたけど、連打すると大変なことになるので
+    // TODO: 難易度でここを切り替えられるようにするべき？
+    if (!isAlreadyMissed || true) {
       game.score -= 10;
       game.score = Math.max(0, game.score);
     }
