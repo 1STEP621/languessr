@@ -17,7 +17,6 @@ import IncorrectEffect from '../components/IncorrectEffect.vue';
 
 const gameDuration = 1000 * 60;
 const hintDuration = 1000 * 5;
-const blockInputDuration = 1000;
 
 const correct = new Audio("/correct.mp3");
 const incorrect = new Audio("/incorrect.mp3");
@@ -62,6 +61,8 @@ const newQuiz = async () => {
 
 function answer(choiced: Language) {
   if (blockInputRef.value) return;
+  console.log(choiced);
+  
 
   const isCorrect = choiced === languageRef.value;
 
@@ -107,11 +108,12 @@ function answer(choiced: Language) {
       game.score = Math.max(0, game.score);
     }
     isAlreadyMissed = true;
-    blockInputRef.value = true;
-    setTimeout(() => {
-      blockInputRef.value = false;
-    }, blockInputDuration);
   }
+
+  blockInputRef.value = true;
+  setTimeout(() => {
+    blockInputRef.value = false;
+  }, isCorrect ? 100 : 1000);
 }
 
 onMounted(() => {
