@@ -66,7 +66,7 @@ function answer(choiced: Language) {
   if (isCorrect) {
     correct.currentTime = 0;
     correct.play();
-    game.score += Math.round(1000 * 50 / (performance.now() - quizStartTime));
+    game.score += Math.max(Math.round(1000 * 50 / (performance.now() - quizStartTime)), 100);
     newQuiz();
   } else {
     incorrect.currentTime = 0;
