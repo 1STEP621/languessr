@@ -17,6 +17,10 @@ const gameDuration = 1000 * 60;
 const hintDuration = 1000 * 5;
 const blockInputDuration = 1000;
 
+const correct = new Audio("/correct.mp3");
+const incorrect = new Audio("/incorrect.mp3");
+const finish = new Audio("/finish.mp3");
+
 const game = useGameStore();
 const view = useViewStore();
 const input = useInputStore();
@@ -55,12 +59,16 @@ const newQuiz = async () => {
 }
 
 function answer(choiced: Language) {
+  if (blockInputRef.value) return;
+
   const isCorrect = choiced === languageRef.value;
 
   if (isCorrect) {
+    correct.play();
     game.score += Math.round(1000 * 50 / (performance.now() - quizStartTime));
     newQuiz();
   } else {
+    incorrect.play();
     if (!isAlreadyMissed) {
       game.score -= 10;
       game.score = Math.max(0, game.score);
@@ -75,15 +83,16 @@ function answer(choiced: Language) {
 
 onMounted(() => {
   // NOTE: 入力をセットアップする
-  input.addEventListener("up", () => { if (!blockInputRef.value) answer(choicesRef.value[0]) }, { view: "game" });
-  input.addEventListener("right", () => { if (!blockInputRef.value) answer(choicesRef.value[1]) }, { view: "game" });
-  input.addEventListener("down", () => { if (!blockInputRef.value) answer(choicesRef.value[2])}, { view: "game" });
-  input.addEventListener("left", () => {if (!blockInputRef.value)answer(choicesRef.value[3])}, { view: "game" });
+  input.addEventListener("up", () => answer(choicesRef.value[0]), { view: "game" });
+  input.addEventListener("right", () => answer(choicesRef.value[1]), { view: "game" });
+  input.addEventListener("down", () => answer(choicesRef.value[2]), { view: "game" });
+  input.addEventListener("left", () => answer(choicesRef.value[3]), { view: "game" });
 
   // NOTE: ゲームを開始する
   progressRef.value?.startCountdown(gameDuration);
   newQuiz();
   setTimeout(() => {
+    finish.play();
     view.state = "result";
   }, gameDuration);
 });
