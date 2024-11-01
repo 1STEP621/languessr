@@ -18,6 +18,11 @@ export default class ScalaLanguage extends Language {
         case (0, _) => "Fizz"
         case (_, 0) => "Buzz"
         case (_, _) => i`
+      ],
+      hints: [
+        "JVM上で動作するオブジェクト指向・関数型プログラミング言語です。",
+        "Javaとの相互運用性が高く、Javaのライブラリを利用することができます。",
+        "Scalable Languageという名前が示すように、大規模なシステムにも適しています。",
       ]
     })
   }

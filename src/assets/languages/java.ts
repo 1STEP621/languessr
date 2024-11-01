@@ -27,6 +27,10 @@ export default class JavaLanguage extends Language {
         }
     }
 }`
+      ],
+      hints: [
+          "\"30億のデバイスで走る\"というスローガンがあります。",
+        "1996年にサン・マイクロシステムズ(現オラクル)によって開発されたオブジェクト指向言語です。",
       ]
     })
   }

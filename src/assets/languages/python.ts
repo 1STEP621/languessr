@@ -16,6 +16,11 @@ export default class PythonLanguage extends Language {
         print("Buzz")
     else:
         print(i)`
+      ],
+      hints: [
+        "シンプルで読みやすいプログラミング言語です。",
+        "インデントによってブロックを表現します。",
+        "様々なライブラリが豊富に用意されています。"
       ]
     })
   }

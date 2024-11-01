@@ -18,6 +18,11 @@ export default class RubyLanguage extends Language {
     puts i
   end
 end`
+      ],
+      hints: [
+        "日本人のまつもとゆきひろ氏によって開発されたプログラミング言語です。",
+        "ストレスなくプログラミングを楽しめるように設計されています。",
+        "多様な構文が用意されており、柔軟なプログラミングが可能です。"
       ]
     })
   }

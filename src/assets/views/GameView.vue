@@ -13,18 +13,27 @@ import { useGameStore } from '../../stores/game';
 import { useViewStore } from '@/stores/view';
 
 const gameDuration = 1000 * 60;
+const hintDuration = 1000 * 5;
 
 const game = useGameStore();
 const view = useViewStore();
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
+const hintRef = ref("");
 
 let quizStartTime = 0;
+
+let hintInterval = 0;
+
 let prevLanguage: Language;
 
 /** すでに1度間違えているかどうか */
 let isAlreadyMissed = false;
+
+const newHint = () => {
+  hintRef.value = pickArrayByRandom(languageRef.value.hints);
+}
 
 const newQuiz = async () => {
   isAlreadyMissed = false;
@@ -34,6 +43,9 @@ const newQuiz = async () => {
   languageRef.value = language;
   choicesRef.value = choices;
   quizStartTime = performance.now();
+  newHint();
+  clearInterval(hintInterval);
+  hintInterval = setInterval(newHint, hintDuration);
 
   prevLanguage = language;
 }
@@ -68,6 +80,9 @@ onMounted(() => {
     <div :class="$style.score">
       Score: <span>{{ game.score }}</span>
     </div>
+    <Transition>
+      <span>{{ hintRef }}</span>
+    </Transition>
     <Suspense>
       <Code :language="languageRef" :class="$style.code" />
       <template #fallback>

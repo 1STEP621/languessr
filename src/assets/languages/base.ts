@@ -11,6 +11,8 @@ interface LanguageOptions {
   /** @see {@link Language.programs} */
   programs: string[];
 
+  /** @see {@link Language.hints} */
+  hints: string[];
 }
 
 /** 言語クラス */
@@ -25,10 +27,14 @@ export class Language {
   /** プログラムリスト */
   public programs: string[];
 
+  /** ヒント */
+  public hints: string[];
+
   public constructor(options: LanguageOptions) {
     this.displayName = options.displayName;
     this.highlightType = options.highlightType;
     this.programs = options.programs;
+    this.hints = options.hints;
   }
 
 }

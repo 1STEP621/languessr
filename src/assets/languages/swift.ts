@@ -17,6 +17,11 @@ export default class SwiftLanguage extends Language {
         print(i)
     }
 }`
+      ],
+      hints: [
+        "Appleが開発したプログラミング言語です。",
+        "iOSアプリケーションを開発するために使われます。",
+        "安全性、効率性、パフォーマンスに優れています。"
       ]
     })
   }

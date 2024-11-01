@@ -14,7 +14,7 @@ import RubyLanguage from "./assets/languages/ruby";
 import RustLanguage from "./assets/languages/rust";
 import ScalaLanguage from "./assets/languages/scala";
 import SwiftLanguage from "./assets/languages/swift";
-import TJSLanguage from "./assets/languages/tjs";
+import KAGLanguage from "./assets/languages/kag";
 import TypstLanguage from "./assets/languages/typst";
 import type { Language } from "./assets/languages/base";
 
@@ -35,6 +35,6 @@ export default [
   RustLanguage,
   ScalaLanguage,
   SwiftLanguage,
-  TJSLanguage,
+  KAGLanguage,
   TypstLanguage,
 ].map(c => new c() as Language);

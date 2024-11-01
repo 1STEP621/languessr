@@ -18,6 +18,11 @@ export default class BashLanguage extends Language {
         echo $i
     fi
 done`
+      ],
+      hints: [
+        "UNIXシェルの一つです。",
+        "シェルスクリプト言語として使われます。",
+        "1989年にBrian Foxによって開発されました。"
       ]
     })
   }

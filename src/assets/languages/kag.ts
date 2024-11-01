@@ -1,9 +1,9 @@
 import { Language } from "./base";
 
-export default class TJSLanguage extends Language {
+export default class KAGLanguage extends Language {
   public constructor() {
     super({
-      displayName: "TJS",
+      displayName: "KAG",
       highlightType: null,
       programs: [
         `[eval exp="tf.i = 1"]
@@ -19,6 +19,11 @@ export default class TJSLanguage extends Language {
 [endif]
 [eval exp="tf.i++"]
 [if exp="tf.i <= 100"][jump target=*loopstart][endif]`
+      ],
+      hints: [
+        "ノベルゲームにおいてトップクラスに使用されている言語です。",
+        "非プログラマが理解しやすく、簡単に書けるように設計されています。",
+        "JavaScript ライクな言語である TJS を埋め込むことができます。"
       ]
     })
   }

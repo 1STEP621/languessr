@@ -17,6 +17,10 @@ export default class TypstLanguage extends Language {
     #value
   ] #linebreak()
 ]`
+      ],
+      hints: [
+        "TeXの代替となる、数式組版を行うためのプログラミング言語です。",
+        "数式の記述が容易で、見やすい組版が可能です。",
       ]
     })
   }
