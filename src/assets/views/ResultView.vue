@@ -32,7 +32,7 @@ switch (true) {
 
 onMounted(() => {
   jsConfetti.addConfetti({
-    confettiNumber: game.score / 5,
+    confettiNumber: Math.min(game.score / 5, 200),
   });
 
   setTimeout(() => {
