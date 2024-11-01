@@ -4,6 +4,7 @@ import { useInputStore } from '../../stores/input';
 import { useViewStore } from '@/stores/view';
 import BaseView from './BaseView.vue';
 import ProgressBar from '../components/ProgressBar.vue';
+import Button from '../components/Button.vue';
 
 const view = useViewStore();
 const input = useInputStore();
@@ -22,6 +23,9 @@ onMounted(async () => {
   for (let i = 0; i < definedKeys.length; i++) {
     const defineKey = definedKeys[i];
     defineKey.value = await input.wait();
+
+    // NOTE: キャリブレーションが中断された（クリックなど）場合キャンセル
+    if (view.state !== "calibration") return;
 
     if (i + 1 < definedKeys.length) {
       // NOTE: 次のキーを null にする（入力待機状態を示す）
@@ -64,7 +68,7 @@ function getKeyNameFromIndex(index: number) {
     <div>
       <p v-if="definedKeys.every(k => k.value)">セットアップが完了しました！</p>
       <template v-else>
-        <p>割り当てるキーもしくはゲームパッドのボタンを押してください。</p>
+        <p>割り当てるキーもしくはゲームパッドのボタンを押してください。<br>タップモードで遊ぶこともできます。</p>
         <small>ゲームパッドは丁寧にゆっくり押してください。<br>ボタンが2回押され、意図しない結果になることがあります。</small>
       </template>
       <table :class="$style.table">
@@ -87,6 +91,12 @@ function getKeyNameFromIndex(index: number) {
           </tr>
         </tbody>
       </table>
+      <template v-if="!definedKeys.every(k => k.value)">
+        <p>もしくは</p>
+        <Button @click="view.state = 'title'">
+          タップモードで遊ぶ
+        </Button>
+      </template>
     </div>
   </BaseView>
 </template>
