@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Languessr",
+  "short_name": "Languessr",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "orientation": "landscape-primary"
+}
