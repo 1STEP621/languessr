@@ -10,10 +10,12 @@ import ProgressBar from '@/assets/components/ProgressBar.vue';
 import Loader from '@/assets/components/Loader.vue';
 import ButtonGrid from '@/assets/components/ButtonGrid.vue';
 import { useGameStore } from '../../stores/game';
+import { useViewStore } from '@/stores/view';
 
 const gameDuration = 1000 * 60;
 
 const game = useGameStore();
+const view = useViewStore();
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
@@ -55,6 +57,9 @@ function answer(choiced: Language) {
 onMounted(() => {
   progressRef.value?.startCountdown(gameDuration);
   newQuiz();
+  setTimeout(() => {
+    view.state = "result";
+  }, gameDuration);
 });
 </script>
 
