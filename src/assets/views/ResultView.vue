@@ -47,7 +47,7 @@ function restart() {
       <span>スコア</span>
       <span :class="$style.score">{{ game.score }}</span>
       <span>ランク</span>
-      <span :class="[$style.rank, $style[rank]]">{{ rank }}</span>
+      <span :class="[$style.rank, $style[`rank${rank}`]]">{{ rank }}</span>
     </div>
     <Button :class="$style.restart" @click="restart">スタート</Button>
   </BaseView>
@@ -79,25 +79,25 @@ function restart() {
       font-size: 5em;
     }
 
-    .rank {
+    .rankS, .rankA, .rankB {
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .S {
+    .rankS {
       background-image: linear-gradient(45deg, #ff4800, #dfff00);
     }
 
-    .A {
+    .rankA {
       background-image: linear-gradient(45deg, #ff4800, #ff00ff);
     }
 
-    .B {
+    .rankB {
       background-image: linear-gradient(45deg, #0a5aff, #ff00ff);
     }
 
-    .C {
+    .rankC {
       color: #755a10;
     }
   }
