@@ -24,7 +24,7 @@ export function shuffleArray<T>(arr: T[]) {
  * @param arr 対象の配列
  * @param ignore 除外する要素
  */
-export function pickArrayByRandom<T>(arr: T[], ignore: T[] = []) {
+export function pickElementByRandom<T>(arr: T[], ignore: T[] = []) {
   let result;
   while (!result || ignore.includes(result)) {
     result = arr[getRandomBetween(0, arr.length)];

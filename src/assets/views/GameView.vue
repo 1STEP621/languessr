@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { pickArrayByRandom as pickElementByRandom, shuffleArray } from '@/utils/random';
+import { pickElementByRandom, shuffleArray } from '@/utils/random';
 import Languages from '../../languages';
 import type { Language } from '../languages/base';
 import BaseView from './BaseView.vue';

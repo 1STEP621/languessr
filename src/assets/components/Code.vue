@@ -2,7 +2,7 @@
 import { useHighlighterStore } from '@/stores/highlighter';
 import { onMounted, ref, watch } from 'vue';
 import type { Language } from '../languages/base';
-import { pickArrayByRandom } from '@/utils/random';
+import { pickElementByRandom } from '@/utils/random';
 
 const props = defineProps<{
   language: Language;
@@ -13,7 +13,7 @@ const highlighter = await useHighlighterStore().promise;
 
 function renderText() {
   const language = props.language;
-  htmlRef.value = highlighter.codeToHtml(pickArrayByRandom(language.programs), {
+  htmlRef.value = highlighter.codeToHtml(pickElementByRandom(language.programs), {
     lang: language.highlightType ?? "text",
     theme: highlighter.getLoadedThemes()[0],
   });
