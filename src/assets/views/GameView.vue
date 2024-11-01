@@ -22,6 +22,7 @@ const input = useInputStore();
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
+const blockInputRef = ref(false);
 const hintRef = ref("");
 
 let quizStartTime = 0;
@@ -57,23 +58,26 @@ function answer(choiced: Language) {
 
   if (isCorrect) {
     game.score += Math.round(1000 * 50 / (performance.now() - quizStartTime));
+    newQuiz();
   } else {
     if (!isAlreadyMissed) {
       game.score -= 10;
       game.score = Math.max(0, game.score);
     }
     isAlreadyMissed = true;
+    blockInputRef.value = true;
+    setTimeout(() => {
+      blockInputRef.value = false;
+    }, 1000);
   }
-
-  if (isCorrect) newQuiz();
 }
 
 onMounted(() => {
   // NOTE: 入力をセットアップする
-  input.addEventListener("up", () => answer(choicesRef.value[0]), { view: "game" });
-  input.addEventListener("right", () => answer(choicesRef.value[1]), { view: "game" });
-  input.addEventListener("down", () => answer(choicesRef.value[2]), { view: "game" });
-  input.addEventListener("left", () => answer(choicesRef.value[3]), { view: "game" });
+  input.addEventListener("up", () => { if (!blockInputRef.value) answer(choicesRef.value[0]) }, { view: "game" });
+  input.addEventListener("right", () => { if (!blockInputRef.value) answer(choicesRef.value[1]) }, { view: "game" });
+  input.addEventListener("down", () => { if (!blockInputRef.value) answer(choicesRef.value[2])}, { view: "game" });
+  input.addEventListener("left", () => {if (!blockInputRef.value)answer(choicesRef.value[3])}, { view: "game" });
 
   // NOTE: ゲームを開始する
   progressRef.value?.startCountdown(gameDuration);
@@ -99,7 +103,7 @@ onMounted(() => {
       </template>
     </Suspense>
     <ButtonGrid>
-      <Button v-for="choice in choicesRef" :key="choice.displayName" @click="answer(choice)">
+      <Button v-for="choice in choicesRef" :key="choice.displayName" :disabled="blockInputRef" @click="answer(choice)">
         {{ choice.displayName }}
       </Button>
     </ButtonGrid>
