@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { createApp, onMounted, ref } from 'vue';
 import { pickElementByRandom, shuffleArray } from '@/utils/random';
 import Languages from '../../languages';
 import type { Language } from '../languages/base';
@@ -12,6 +12,8 @@ import ButtonGrid from '@/assets/components/ButtonGrid.vue';
 import { useGameStore } from '../../stores/game';
 import { useViewStore } from '@/stores/view';
 import { useInputStore } from '@/stores/input';
+import CorrectEffect from '../components/CorrectEffect.vue';
+import IncorrectEffect from '../components/IncorrectEffect.vue';
 
 const gameDuration = 1000 * 60;
 const hintDuration = 1000 * 5;
@@ -62,6 +64,16 @@ function answer(choiced: Language) {
   if (blockInputRef.value) return;
 
   const isCorrect = choiced === languageRef.value;
+
+  const element = document.createElement("div");
+  const effect = createApp(isCorrect ? CorrectEffect : IncorrectEffect, {
+    onAnimationEnd: () => {
+      element.remove();
+      effect.unmount();
+    }
+  });
+  effect.mount(element);
+  document.body.appendChild(element);
 
   if (isCorrect) {
     // NOTE: 演出
