@@ -36,10 +36,10 @@ function answer(choiced: Language) {
   const isCorrect = choiced === languageRef.value;
 
   if (isCorrect) {
-    game.score++;
+    game.score += Math.round(((progressRef.value?.getEndTime() ?? 0) - performance.now()) / 100);
   } else {
     if (!isAlreadyMissed) {
-      game.score--;
+      game.score -= 10;
       game.score = Math.max(0, game.score);
     }
     isAlreadyMissed = true;

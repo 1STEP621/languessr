@@ -17,6 +17,20 @@ defineExpose({
     startTime = performance.now();
     duration = d;
     requestAnimationFrame(frame);
+  },
+
+  /**
+   * カウントダウンが開始された時間（ミリ秒）を取得します。
+   */
+  getStartTime() {
+    return startTime;
+  },
+
+  /**
+   * カウントダウンが終了される時間（ミリ秒）を取得します。
+   */
+  getEndTime() {
+    return startTime + duration;
   }
 });
 
