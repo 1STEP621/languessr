@@ -35,10 +35,14 @@ onMounted(() => {
     confettiNumber: game.score / 5,
   });
 
-  input.addEventListener("up", () => restart(), { view: "result" });
-  input.addEventListener("right", () => restart(), { view: "result" });
-  input.addEventListener("down", () => restart(), { view: "result" });
-  input.addEventListener("left", () => restart(), { view: "result" });
+  setTimeout(() => {
+    if (view.state === "result") {
+      input.addEventListener("up", () => restart(), { view: "result" });
+      input.addEventListener("right", () => restart(), { view: "result" });
+      input.addEventListener("down", () => restart(), { view: "result" });
+      input.addEventListener("left", () => restart(), { view: "result" });
+    }
+  }, 1000);
 });
 
 function restart() {
