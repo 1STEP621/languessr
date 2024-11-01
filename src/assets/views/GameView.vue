@@ -18,18 +18,22 @@ const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
 
+let prevLanguage: Language;
+
 /** すでに1度間違えているかどうか */
 let isAlreadyMissed = false;
 
 const newQuiz = async () => {
   isAlreadyMissed = false;
 
-  const language = pickArrayByRandom(Languages);
+  const language = pickArrayByRandom(Languages, [prevLanguage]);
   const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 3), language]);
   languageRef.value = language;
   choicesRef.value = choices;
 
   progressRef.value?.startCountdown(quizDuration);
+
+  prevLanguage = language;
 }
 
 function answer(choiced: Language) {
