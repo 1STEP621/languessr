@@ -64,13 +64,30 @@ function answer(choiced: Language) {
   const isCorrect = choiced === languageRef.value;
 
   if (isCorrect) {
+    // NOTE: 演出
     correct.currentTime = 0;
     correct.play();
+    navigator.getGamepads().forEach(gamepad => {
+      gamepad?.vibrationActuator.playEffect("dual-rumble", {
+        duration: 300,
+        weakMagnitude: 0.5,
+        strongMagnitude: 0.5
+      });
+    });
+
     game.score += Math.min(Math.round(1000 * 50 / (performance.now() - quizStartTime)), 100);
     newQuiz();
   } else {
+    // NOTE: 演出
     incorrect.currentTime = 0;
     incorrect.play();
+    navigator.getGamepads().forEach(gamepad => {
+      gamepad?.vibrationActuator.playEffect("dual-rumble", {
+        duration: 500,
+        weakMagnitude: 0.5,
+        strongMagnitude: 1
+      });
+    });
 
     // NOTE: 初心者用にしてたけど、連打すると大変なことになるので
     // TODO: 難易度でここを切り替えられるようにするべき？
