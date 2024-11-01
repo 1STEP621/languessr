@@ -11,13 +11,14 @@ import Loader from '@/assets/components/Loader.vue';
 import ButtonGrid from '@/assets/components/ButtonGrid.vue';
 import { useGameStore } from '../../stores/game';
 
-const quizDuration = 5000;
+const gameDuration = 1000 * 60;
 
 const game = useGameStore();
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
 
+let quizStartTime = 0;
 let prevLanguage: Language;
 
 /** すでに1度間違えているかどうか */
@@ -30,8 +31,7 @@ const newQuiz = async () => {
   const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 3), language]);
   languageRef.value = language;
   choicesRef.value = choices;
-
-  progressRef.value?.startCountdown(quizDuration);
+  quizStartTime = performance.now();
 
   prevLanguage = language;
 }
@@ -40,7 +40,7 @@ function answer(choiced: Language) {
   const isCorrect = choiced === languageRef.value;
 
   if (isCorrect) {
-    game.score += Math.round(((progressRef.value?.getEndTime() ?? 0) - performance.now()) / 100);
+    game.score += Math.round(1000 * 50 / (performance.now() - quizStartTime));
   } else {
     if (!isAlreadyMissed) {
       game.score -= 10;
@@ -52,7 +52,10 @@ function answer(choiced: Language) {
   if (isCorrect) newQuiz();
 }
 
-onMounted(newQuiz);
+onMounted(() => {
+  progressRef.value?.startCountdown(gameDuration);
+  newQuiz();
+});
 </script>
 
 <template>
@@ -98,6 +101,7 @@ onMounted(newQuiz);
     font-weight: bold;
   }
 }
+
 .code {
   display: flex;
   align-items: center;
@@ -107,6 +111,7 @@ onMounted(newQuiz);
   overflow: hidden;
 
   position: relative;
+
   &::before {
     content: "";
     position: absolute;
@@ -116,6 +121,7 @@ onMounted(newQuiz);
     height: 10%;
     background: linear-gradient(to bottom, var(--c-bg), transparent);
   }
+
   &::after {
     content: "";
     position: absolute;
