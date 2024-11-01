@@ -1,0 +1,112 @@
+<script lang="ts" setup>
+import Button from '../components/Button.vue';
+import { useGameStore } from '@/stores/game';
+import BaseView from './BaseView.vue';
+import { useViewStore } from '@/stores/view';
+import JSConfetti from 'js-confetti';
+import { onMounted } from 'vue';
+
+const view = useViewStore();
+const game = useGameStore();
+
+const jsConfetti = new JSConfetti();
+
+let rank: 'S' | 'A' | 'B' | 'C';
+
+switch (true) {
+  case game.score >= 500:
+    rank = 'S';
+    break;
+  case game.score >= 300:
+    rank = 'A';
+    break;
+  case game.score >= 200:
+    rank = 'B';
+    break;
+  default:
+    rank = 'C';
+    break;
+}
+
+onMounted(() => {
+  jsConfetti.addConfetti({
+    confettiNumber: game.score / 5,
+  });
+});
+
+function restart() {
+  jsConfetti.destroyCanvas();
+  game.score = 0;
+  view.state = 'title';
+}
+</script>
+
+<template>
+  <BaseView :class="$style.view">
+    <div :class="$style.grid">
+      <span>スコア</span>
+      <span :class="$style.score">{{ game.score }}</span>
+      <span>ランク</span>
+      <span :class="[$style.rank, $style[rank]]">{{ rank }}</span>
+    </div>
+    <Button :class="$style.restart" @click="restart">スタート</Button>
+  </BaseView>
+</template>
+
+<style module>
+.view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.2em;
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin-block: 2em;
+
+    span {
+      margin: auto;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .score,
+    .rank {
+      font-size: 5em;
+    }
+
+    .rank {
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .S {
+      background-image: linear-gradient(45deg, #ff4800, #dfff00);
+    }
+
+    .A {
+      background-image: linear-gradient(45deg, #ff4800, #ff00ff);
+    }
+
+    .B {
+      background-image: linear-gradient(45deg, #0a5aff, #ff00ff);
+    }
+
+    .C {
+      color: #755a10;
+    }
+  }
+
+  .restart {
+    margin-block: 2em;
+    font-size: 1em;
+    padding: 1em 3em;
+    border-radius: 1em;
+  }
+}
+</style>
