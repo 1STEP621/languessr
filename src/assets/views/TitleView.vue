@@ -12,7 +12,7 @@ const view = useViewStore();
       <img :class="$style.icon" src="/icon.svg" alt="logo" />
       <h1 :class="$style.title">Languessr</h1>
     </div>
-    <Button :class="$style.start" @click="view.state = 'game'">スタート</Button>
+    <Button :class="$style.start" @click="view.state = 'countdown'">スタート</Button>
   </BaseView>
 </template>
 

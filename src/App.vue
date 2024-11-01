@@ -5,6 +5,7 @@ import { useViewStore } from '@/stores/view';
 import TitleView from './assets/views/TitleView.vue';
 import CalibrationView from './assets/views/CalibrationView.vue';
 import ResultView from './assets/views/ResultView.vue';
+import CountdownView from './assets/views/CountdownView.vue';
 
 const view = useViewStore();
 </script>
@@ -12,6 +13,7 @@ const view = useViewStore();
 <template>
   <CalibrationView v-if="view.state === 'calibration'" />
   <TitleView v-if="view.state === 'title'" />
+  <CountdownView v-if="view.state === 'countdown'" />
   <GameView v-if="view.state === 'game'" />
   <ResultView v-if="view.state === 'result'" />
   <DisconnectedView v-if="view.state === 'disconnected'" />
