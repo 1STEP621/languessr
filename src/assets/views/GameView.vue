@@ -11,12 +11,14 @@ import Loader from '@/assets/components/Loader.vue';
 import ButtonGrid from '@/assets/components/ButtonGrid.vue';
 import { useGameStore } from '../../stores/game';
 import { useViewStore } from '@/stores/view';
+import { useInputStore } from '@/stores/input';
 
 const gameDuration = 1000 * 60;
 const hintDuration = 1000 * 5;
 
 const game = useGameStore();
 const view = useViewStore();
+const input = useInputStore();
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
@@ -67,6 +69,13 @@ function answer(choiced: Language) {
 }
 
 onMounted(() => {
+  // NOTE: 入力をセットアップする
+  input.addEventListener("up", () => answer(choicesRef.value[0]), { view: "game" });
+  input.addEventListener("right", () => answer(choicesRef.value[1]), { view: "game" });
+  input.addEventListener("down", () => answer(choicesRef.value[2]), { view: "game" });
+  input.addEventListener("left", () => answer(choicesRef.value[3]), { view: "game" });
+
+  // NOTE: ゲームを開始する
   progressRef.value?.startCountdown(gameDuration);
   newQuiz();
   setTimeout(() => {
