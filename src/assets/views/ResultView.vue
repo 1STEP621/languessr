@@ -22,7 +22,7 @@ switch (true) {
   case game.score >= 300:
     rank = 'A';
     break;
-  case game.score >= 200:
+  case game.score >= 100:
     rank = 'B';
     break;
   default:
