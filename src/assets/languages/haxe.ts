@@ -20,7 +20,7 @@ export default class HaxeLanguage extends Language {
       ],
       hints: [
         "JavaScriptの代替言語(AltJS)の一種で、オブジェクト指向・関数型の言語です。",
-        "様々なターゲットにコンパイルできることが有名で、AVM、Java VM、独自の仮想マシンであるNeko及びHashLinkのバイトコード、JavaScript、ActionScript 3、C++、Cppia、C#、Java、PHP、Python 3、Luaに変換されます。"
+        "C++, Java, Luaなど、様々なターゲットにコンパイルできることが有名です。"
       ]
     })
   }

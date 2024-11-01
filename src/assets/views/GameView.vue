@@ -89,9 +89,7 @@ onMounted(() => {
     <div :class="$style.score">
       Score: <span>{{ game.score }}</span>
     </div>
-    <Transition>
-      <span>{{ hintRef }}</span>
-    </Transition>
+    <span :class="$style.hint">Tips: {{ hintRef }}</span>
     <Suspense>
       <Code :language="languageRef" :class="$style.code" />
       <template #fallback>
@@ -129,6 +127,11 @@ onMounted(() => {
     color: var(--c-primary);
     font-weight: bold;
   }
+}
+
+.hint {
+  color: #808080;
+  font-size: 1.4em;
 }
 
 .code {
