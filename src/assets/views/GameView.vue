@@ -15,6 +15,7 @@ import { useInputStore } from '@/stores/input';
 
 const gameDuration = 1000 * 60;
 const hintDuration = 1000 * 5;
+const blockInputDuration = 1000;
 
 const game = useGameStore();
 const view = useViewStore();
@@ -68,7 +69,7 @@ function answer(choiced: Language) {
     blockInputRef.value = true;
     setTimeout(() => {
       blockInputRef.value = false;
-    }, 1000);
+    }, blockInputDuration);
   }
 }
 
