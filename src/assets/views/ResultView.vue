@@ -5,9 +5,11 @@ import BaseView from './BaseView.vue';
 import { useViewStore } from '@/stores/view';
 import JSConfetti from 'js-confetti';
 import { onMounted } from 'vue';
+import { useInputStore } from '@/stores/input';
 
 const view = useViewStore();
 const game = useGameStore();
+const input = useInputStore();
 
 const jsConfetti = new JSConfetti();
 
@@ -32,6 +34,11 @@ onMounted(() => {
   jsConfetti.addConfetti({
     confettiNumber: game.score / 5,
   });
+
+  input.addEventListener("up", () => restart(), { view: "result" });
+  input.addEventListener("right", () => restart(), { view: "result" });
+  input.addEventListener("down", () => restart(), { view: "result" });
+  input.addEventListener("left", () => restart(), { view: "result" });
 });
 
 function restart() {
@@ -49,7 +56,8 @@ function restart() {
       <span>ランク</span>
       <span :class="[$style.rank, $style[`rank${rank}`]]">{{ rank }}</span>
     </div>
-    <Button :class="$style.restart" @click="restart">スタート</Button>
+    <Button :class="$style.restart" @click="restart">タイトルに戻る</Button>
+    <p>いずれかのキーを押すことでもタイトルに戻れます。</p>
   </BaseView>
 </template>
 
