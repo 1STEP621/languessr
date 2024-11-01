@@ -11,7 +11,6 @@ import Loader from '@/assets/components/Loader.vue';
 import ButtonGrid from '@/assets/components/ButtonGrid.vue';
 
 const quizDuration = 5000;
-const choiceCount = 4;
 
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
@@ -19,7 +18,7 @@ const choicesRef = ref<Language[]>([]);
 
 const newQuiz = async () => {
   const language = pickArrayByRandom(Languages);
-  const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, choiceCount - 1), language]);
+  const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 3), language]);
   languageRef.value = language;
   choicesRef.value = choices;
 
