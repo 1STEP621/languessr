@@ -68,7 +68,7 @@ function answer(choiced: Language) {
     correct.currentTime = 0;
     correct.play();
     navigator.getGamepads().forEach(gamepad => {
-      gamepad?.vibrationActuator.playEffect("dual-rumble", {
+      gamepad?.vibrationActuator?.playEffect("dual-rumble", {
         duration: 300,
         weakMagnitude: 0.5,
         strongMagnitude: 0.5
@@ -82,7 +82,7 @@ function answer(choiced: Language) {
     incorrect.currentTime = 0;
     incorrect.play();
     navigator.getGamepads().forEach(gamepad => {
-      gamepad?.vibrationActuator.playEffect("dual-rumble", {
+      gamepad?.vibrationActuator?.playEffect("dual-rumble", {
         duration: 500,
         weakMagnitude: 0.5,
         strongMagnitude: 1
