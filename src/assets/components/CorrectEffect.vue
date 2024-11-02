@@ -9,8 +9,6 @@ const elementRef = ref<HTMLElement | null>(null);
 
 onMounted(() => {
   const element = elementRef.value!;
-  console.log(element);
-
   setTimeout(() => {
     props.onAnimationEnd();
   }, 500);

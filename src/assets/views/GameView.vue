@@ -61,8 +61,7 @@ const newQuiz = async () => {
 
 function answer(choiced: Language) {
   if (blockInputRef.value) return;
-  console.log(choiced);
-  
+  console.trace("Choiced language:", choiced);
 
   const isCorrect = choiced === languageRef.value;
 
