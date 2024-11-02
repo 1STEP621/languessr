@@ -46,9 +46,8 @@ export const useInputStore = defineStore("input", () => {
         const button = gamepad.buttons[i];
         const id = `${gamepad.id} / ${i}`;
 
-        if (button.value !== 0) console.log(`[${Math.floor(performance.now() / 1000)}sec] Pressed button ${i} with value ${button.value} on ${id}`);
-
-        if (button.touched) {
+        if (button.pressed) {
+          console.log(`[${Math.floor(performance.now() / 1000)}sec] Pressed button ${i} with (value ${button.value}, touched ${button.touched}) on ${id}`);
           if (!pressedButtons.has(id)) {
             press(id);
             pressedButtons.add(id);
