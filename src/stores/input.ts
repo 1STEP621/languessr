@@ -50,6 +50,7 @@ export const useInputStore = defineStore("input", () => {
           if (!pressedButtons.has(id)) {
             press(id);
             pressedButtons.add(id);
+            break;
           }
         } else {
           pressedButtons.delete(id);
