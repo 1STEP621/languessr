@@ -103,7 +103,7 @@ function answer(choiced: Language) {
     });
 
     // NOTE: 初心者用にしてたけど、連打すると大変なことになるので
-    if (!isAlreadyMissed || ["hard"].includes(game.difficulty)) {
+    if ((game.difficulty !== "easy" && !isAlreadyMissed) || game.difficulty === "hard") {
       game.score -= 10;
       game.score = Math.max(0, game.score);
     }
