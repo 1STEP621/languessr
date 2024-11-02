@@ -28,7 +28,7 @@ const input = useInputStore();
 const progressRef = ref<typeof ProgressBar>();
 const languageRef = ref<Language>(Languages[0]);
 const choicesRef = ref<Language[]>([]);
-const blockInputRef = ref(false);
+const disabledRef = ref(false);
 const hintRef = ref("");
 
 let quizStartTime = 0;
@@ -40,11 +40,17 @@ let prevLanguage: Language;
 /** すでに1度間違えているかどうか */
 let isAlreadyMissed = false;
 
-const newHint = () => {
+async function wait(milliseconds: number): Promise<void> {
+  disabledRef.value = true;
+  await new Promise(resolve => setTimeout(resolve, milliseconds));
+  disabledRef.value = false;
+}
+
+function newHint() {
   hintRef.value = pickElementByRandom(languageRef.value.hints);
 }
 
-const newQuiz = async () => {
+async function newQuiz() {
   isAlreadyMissed = false;
 
   console.log(`[${Math.floor(performance.now() / 1000)}sec] New quiz issued`);
@@ -61,9 +67,9 @@ const newQuiz = async () => {
   prevLanguage = language;
 }
 
-function answer(choiced: Language) {
+async function answer(choiced: Language) {
   console.log(`[${Math.floor(performance.now() / 1000)}sec]`, choiced);
-  if (blockInputRef.value) return;
+  if (disabledRef.value) return;
 
   const isCorrect = choiced === languageRef.value;
 
@@ -90,6 +96,8 @@ function answer(choiced: Language) {
     });
 
     game.score += Math.min(Math.round(1000 * 50 / (performance.now() - quizStartTime)), 100);
+
+    await wait(1000);
     newQuiz();
   } else {
     // NOTE: 演出
@@ -107,18 +115,14 @@ function answer(choiced: Language) {
     if ((game.difficulty !== "easy" && !isAlreadyMissed) || game.difficulty === "hard") {
       game.score -= 10;
       game.score = Math.max(0, game.score);
+      isAlreadyMissed = true;
     }
-    isAlreadyMissed = true;
 
-    if (["easy"].includes(game.difficulty)) {
+    await wait(1000);
+    if (game.difficulty === "easy") {
       newQuiz();
     }
   }
-
-  blockInputRef.value = true;
-  setTimeout(() => {
-    blockInputRef.value = false;
-  }, isCorrect ? 100 : 1000);
 }
 
 onMounted(() => {
@@ -158,7 +162,7 @@ onMounted(() => {
       </template>
     </Suspense>
     <ButtonGrid>
-      <Button v-for="choice in choicesRef" :key="choice.displayName" :disabled="blockInputRef" @click="answer(choice)">
+      <Button v-for="choice in choicesRef" :key="choice.displayName" :disabled="disabledRef" @click="answer(choice)">
         {{ choice.displayName }}
       </Button>
     </ButtonGrid>
