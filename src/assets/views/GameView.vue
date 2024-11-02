@@ -104,7 +104,7 @@ function answer(choiced: Language) {
 
     // NOTE: 初心者用にしてたけど、連打すると大変なことになるので
     if (!isAlreadyMissed || ["hard"].includes(game.difficulty)) {
-      game.score -= 50;
+      game.score -= 10;
       game.score = Math.max(0, game.score);
     }
     isAlreadyMissed = true;
