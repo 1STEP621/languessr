@@ -49,14 +49,16 @@ function startGame() {
       <Transition>
         <Difficulty v-if="game.difficulty === 'easy'" name="かんたん" color="#293a47">
           <li>ヒントが提供されます</li>
-          <li>間違えた際のポイントの減点が少なくなります</li>
+          <li>間違えたらすぐに次の問題に進みます</li>
         </Difficulty>
         <Difficulty v-else-if="game.difficulty === 'normal'" name="ふつう" color="#514418">
           <li>ヒントが提供されます</li>
-          <li>間違えた際にポイントが減点されます</li>
+          <li>間違えても正解するまで次の問題に進みません</li>
+          <li>間違えた際のポイントの減点が少なくなります</li>
         </Difficulty>
         <Difficulty v-else-if="game.difficulty === 'hard'" name="むずかしい" color="#2f0929">
           <li>ヒントは提供されません</li>
+          <li>間違えても正解するまで次の問題に進みません</li>
           <li>間違えた際にポイントが減点されます</li>
         </Difficulty>
       </Transition>

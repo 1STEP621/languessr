@@ -103,11 +103,15 @@ function answer(choiced: Language) {
     });
 
     // NOTE: 初心者用にしてたけど、連打すると大変なことになるので
-    if (!isAlreadyMissed || ["hard", "normal"].includes(game.difficulty)) {
+    if (!isAlreadyMissed || ["hard"].includes(game.difficulty)) {
       game.score -= 50;
       game.score = Math.max(0, game.score);
     }
     isAlreadyMissed = true;
+
+    if (["easy"].includes(game.difficulty)) {
+      newQuiz();
+    }
   }
 
   blockInputRef.value = true;
