@@ -17,12 +17,16 @@ function withResolvers<T>() {
 export type KeyType = "up" | "left" | "right" | "down" | "a";
 
 export const useInputStore = defineStore("input", () => {
-  const eventTarget = new EventTarget();
-  const view = useViewStore();
-
   let resolvers = withResolvers<string>();
   let pressedButtons = new Set<string>();
   let keys = new Map<string, KeyType>();
+  let events = ref<Record<KeyType, () => any>>({
+    up: () => {},
+    right: () => {},
+    down: () => {},
+    left: () => {},
+    a: () => {},
+  });
 
   function press(value: string) {
     // NOTE: Promise の解決（生のキー入力）
@@ -30,7 +34,7 @@ export const useInputStore = defineStore("input", () => {
     resolvers = withResolvers<string>();
 
     // NOTE: キーイベントを発生（整理されたキー入力）
-    if (keys.get(value)) eventTarget.dispatchEvent(new Event(keys.get(value)!));
+    if (keys.get(value)) events.value[keys.get(value)!]();
   }
 
   // NOTE: キーの検知
@@ -67,14 +71,6 @@ export const useInputStore = defineStore("input", () => {
       return resolvers.promise;
     },
     keys,
-    addEventListener(type: KeyType, listener: () => void, condition: { view: ViewType; }) {
-      eventTarget.addEventListener(type, evt => {
-        if (view.state === condition.view) {
-          listener();
-          evt.preventDefault();
-          evt.stopPropagation();
-        }
-      });
-    }
+    events,
   };
 });

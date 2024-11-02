@@ -35,9 +35,16 @@ onMounted(() => {
     confettiNumber: Math.min(game.score / 5, 200),
   });
 
+  input.events = {
+    up() {},
+    right() {},
+    down() {},
+    left() {},
+    a() {},
+  };
   setTimeout(() => {
     if (view.state === "result") {
-      input.addEventListener("a", () => restart(), { view: "result" });
+      input.events.a = restart;
     }
   }, 1000);
 });

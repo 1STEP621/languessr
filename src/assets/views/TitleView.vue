@@ -15,9 +15,13 @@ let difficultiesIndex = 0;
 
 onMounted(() => {
   // NOTE: 難易度を上下で操作
-  input.addEventListener("up", upDifficulty, { view: "title" });
-  input.addEventListener("down", downDifficulty, { view: "title" });
-  input.addEventListener("a", startGame, { view: "title" });
+  input.events = {
+    up: upDifficulty,
+    right: () => {},
+    down: downDifficulty,
+    left: () => {},
+    a: startGame,
+  };
 });
 const game = useGameStore();
 

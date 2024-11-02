@@ -62,8 +62,8 @@ const newQuiz = async () => {
 }
 
 function answer(choiced: Language) {
-  if (blockInputRef.value) return;
   console.log(`[${Math.floor(performance.now() / 1000)}sec]`, choiced);
+  if (blockInputRef.value) return;
 
   const isCorrect = choiced === languageRef.value;
 
@@ -121,24 +121,25 @@ function answer(choiced: Language) {
   }, isCorrect ? 100 : 1000);
 }
 
-let hadBeenMounted = false;
 onMounted(() => {
-  // NOTE: 入力をセットアップする
-  if (!hadBeenMounted) {
-    input.addEventListener("up", () => answer(choicesRef.value[0]), { view: "game" });
-    input.addEventListener("right", () => answer(choicesRef.value[1]), { view: "game" });
-    input.addEventListener("down", () => answer(choicesRef.value[2]), { view: "game" });
-    input.addEventListener("left", () => answer(choicesRef.value[3]), { view: "game" });
-    hadBeenMounted = true;
-  }
+  // NOTE: 入力イベントを設定する
+  input.events = {
+    up: () => answer(choicesRef.value[0]),
+    right: () => answer(choicesRef.value[1]),
+    down: () => answer(choicesRef.value[2]),
+    left: () => answer(choicesRef.value[3]),
+    a: () => {},
+  };
 
-  // NOTE: ゲームを開始する
+  // NOTE: カウントダウンをセットアップする
   progressRef.value?.startCountdown(gameDuration);
-  newQuiz();
   setTimeout(() => {
     finish.play();
     view.state = "result";
   }, gameDuration);
+
+  // NOTE: ゲームを開始する
+  newQuiz();
 });
 </script>
 
