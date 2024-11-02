@@ -49,7 +49,11 @@ async function wait(milliseconds: number): Promise<void> {
 }
 
 function newHint() {
+  if (hintInterval) clearTimeout(hintInterval);
+
   hintRef.value = pickElementByRandom(languageRef.value.hints);
+
+  hintInterval = setTimeout(newHint, hintDuration);
 }
 
 async function newQuiz() {
@@ -62,9 +66,8 @@ async function newQuiz() {
   languageRef.value = language;
   choicesRef.value = choices;
   quizStartTime = performance.now();
+
   newHint();
-  clearInterval(hintInterval);
-  hintInterval = setInterval(newHint, hintDuration);
 
   prevLanguage = language;
 }
@@ -88,6 +91,7 @@ async function answer(choiced: Language) {
       });
     });
 
+    // NOTE: スコア設定
     game.score += Math.min(Math.round(1000 * 50 / (performance.now() - quizStartTime)), 100);
 
     await wait(waitDuration);
@@ -104,7 +108,7 @@ async function answer(choiced: Language) {
       });
     });
 
-    // NOTE: 初心者用にしてたけど、連打すると大変なことになるので
+    // NOTE: スコア設定
     if ((game.difficulty !== "easy" && !isAlreadyMissed) || game.difficulty === "hard") {
       game.score -= 10;
       game.score = Math.max(0, game.score);
