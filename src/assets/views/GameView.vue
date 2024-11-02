@@ -14,9 +14,11 @@ import { useViewStore } from '@/stores/view';
 import { useInputStore } from '@/stores/input';
 import CorrectEffect from '../components/CorrectEffect.vue';
 import IncorrectEffect from '../components/IncorrectEffect.vue';
+import { playAnimation } from '@/utils/animation';
 
 const gameDuration = 1000 * 60;
 const hintDuration = 1000 * 5;
+const waitDuration = 1000;
 
 const correct = new Audio("/correct.mp3");
 const incorrect = new Audio("/incorrect.mp3");
@@ -72,16 +74,7 @@ async function answer(choiced: Language) {
   if (disabledRef.value) return;
 
   const isCorrect = choiced === languageRef.value;
-
-  const element = document.createElement("div");
-  const effect = createApp(isCorrect ? CorrectEffect : IncorrectEffect, {
-    onAnimationEnd: () => {
-      element.remove();
-      effect.unmount();
-    }
-  });
-  effect.mount(element);
-  document.body.appendChild(element);
+  playAnimation(isCorrect ? CorrectEffect : IncorrectEffect);
 
   if (isCorrect) {
     // NOTE: 演出
@@ -97,7 +90,7 @@ async function answer(choiced: Language) {
 
     game.score += Math.min(Math.round(1000 * 50 / (performance.now() - quizStartTime)), 100);
 
-    await wait(1000);
+    await wait(waitDuration);
     newQuiz();
   } else {
     // NOTE: 演出
@@ -118,7 +111,7 @@ async function answer(choiced: Language) {
       isAlreadyMissed = true;
     }
 
-    await wait(1000);
+    await wait(waitDuration);
     if (game.difficulty === "easy") {
       newQuiz();
     }
