@@ -47,6 +47,8 @@ const newHint = () => {
 const newQuiz = async () => {
   isAlreadyMissed = false;
 
+  console.log(`[${Math.floor(performance.now() / 1000)}sec] New quiz issued`);
+
   const language = pickElementByRandom(Languages, [prevLanguage]);
   const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 3), language]);
   languageRef.value = language;
