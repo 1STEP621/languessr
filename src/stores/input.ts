@@ -67,9 +67,11 @@ export const useInputStore = defineStore("input", () => {
     },
     keys,
     addEventListener(type: KeyType, listener: () => void, condition: { view: ViewType; }) {
-      eventTarget.addEventListener(type, () => {
+      eventTarget.addEventListener(type, evt => {
         if (view.state === condition.view) {
           listener();
+          evt.preventDefault();
+          evt.stopPropagation();
         }
       });
     }
