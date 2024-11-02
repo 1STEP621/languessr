@@ -121,12 +121,16 @@ function answer(choiced: Language) {
   }, isCorrect ? 100 : 1000);
 }
 
+let hadBeenMounted = false;
 onMounted(() => {
   // NOTE: 入力をセットアップする
-  input.addEventListener("up", () => answer(choicesRef.value[0]), { view: "game" });
-  input.addEventListener("right", () => answer(choicesRef.value[1]), { view: "game" });
-  input.addEventListener("down", () => answer(choicesRef.value[2]), { view: "game" });
-  input.addEventListener("left", () => answer(choicesRef.value[3]), { view: "game" });
+  if (!hadBeenMounted) {
+    input.addEventListener("up", () => answer(choicesRef.value[0]), { view: "game" });
+    input.addEventListener("right", () => answer(choicesRef.value[1]), { view: "game" });
+    input.addEventListener("down", () => answer(choicesRef.value[2]), { view: "game" });
+    input.addEventListener("left", () => answer(choicesRef.value[3]), { view: "game" });
+    hadBeenMounted = true;
+  }
 
   // NOTE: ゲームを開始する
   progressRef.value?.startCountdown(gameDuration);
