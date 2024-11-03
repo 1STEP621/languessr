@@ -36,11 +36,11 @@ onMounted(() => {
   });
 
   input.events = {
-    up() {},
-    right() {},
-    down() {},
-    left() {},
-    a() {},
+    up() { },
+    right() { },
+    down() { },
+    left() { },
+    a() { },
   };
   setTimeout(() => {
     if (view.state === "result") {
@@ -59,6 +59,9 @@ function restart() {
 
 <template>
   <BaseView :class="$style.view">
+    <span :class="[$style.difficulty, $style[game.difficulty]]">{{ {
+      easy: "かんたん", normal: "ふつう", hard: "むずかしい"
+    }[game.difficulty] }}</span>
     <div :class="$style.grid">
       <span>スコア</span>
       <span :class="$style.score">{{ game.score }}</span>
@@ -78,10 +81,27 @@ function restart() {
 
   font-size: 1.2em;
 
+  .difficulty {
+    font-size: 4em;
+    font-weight: bold;
+
+    &.easy {
+      color: #6e9abd;
+    }
+
+    &.normal {
+      color: #b19434;
+    }
+
+    &.hard {
+      color: #aa2095;
+    }
+  }
+
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
+    grid-template-columns: auto 1fr;
+    gap: 1em 3.5em;
     margin-block: 2em;
 
     span {
@@ -95,7 +115,9 @@ function restart() {
       font-size: 5em;
     }
 
-    .rankS, .rankA, .rankB {
+    .rankS,
+    .rankA,
+    .rankB {
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
