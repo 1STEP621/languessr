@@ -43,7 +43,8 @@ export default class NadeshikoLanguage extends Language {
       hints: [
         "日本語でプログラミングできる言語です。",
         "ひまわりの後継プログラミング言語として、より自然な記述を目標として0から開発されました。",
-      ]
+      ],
+      difficulty: "easy",
     })
   }
 }

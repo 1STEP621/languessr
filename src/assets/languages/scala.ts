@@ -49,7 +49,8 @@ def enumerateDivisors(x: Int, i: Int = 1, result: Seq[Int] = Seq()): Seq[Int] =
         "JVM上で動作するオブジェクト指向・関数型プログラミング言語です。",
         "Javaとの相互運用性が高く、Javaのライブラリを利用することができます。",
         "Scalable Languageという名前が示すように、大規模なシステムにも適しています。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

@@ -11,7 +11,8 @@ export default class OokLanguage extends Language {
       hints: [
         "Ook., Ook!, Ook? の3つの単語だけで構成されます。",
         "Brainfuckの派生言語の一つです。"
-      ]
+      ],
+      difficulty: "easy",
     })
   }
 }

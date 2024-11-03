@@ -13,6 +13,9 @@ interface LanguageOptions {
 
   /** @see {@link Language.hints} */
   hints: string[];
+
+  /** @see {@link Language.difficulty} */
+  difficulty: "easy" | "normal" | "hard",
 }
 
 /** 言語クラス */
@@ -30,11 +33,15 @@ export class Language {
   /** ヒント */
   public hints: string[];
 
+  /** 難易度 */
+  public difficulty: "easy" | "normal" | "hard";
+
   public constructor(options: LanguageOptions) {
     this.displayName = options.displayName;
     this.highlightType = options.highlightType;
     this.programs = options.programs;
     this.hints = options.hints;
+    this.difficulty = options.difficulty;
   }
 
 }

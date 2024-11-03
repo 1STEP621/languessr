@@ -44,7 +44,8 @@ end program fizzbuzz`,
       hints: [
         "数値計算が得意なプログラミング言語です。",
         "宇宙開発にも使われることがあります。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

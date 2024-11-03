@@ -43,7 +43,8 @@ export default class PerlLanguage extends Language {
         "スクリプト言語の一つです。",
         "文字列処理が得意なプログラミング言語です。",
         "正規表現を使ったパターンマッチングが得意です。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

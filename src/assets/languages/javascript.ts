@@ -23,7 +23,8 @@ export default class JavaScriptLanguage extends Language {
         "Webページの動的な挙動を実装するためのプログラミング言語です。",
         "クライアントサイドで動作する言語です。",
         "ECMAScriptという仕様に準拠しています。"
-      ]
+      ],
+      difficulty: "easy",
     })
   }
 }

@@ -21,7 +21,8 @@ export default class PythonLanguage extends Language {
         "シンプルで読みやすいプログラミング言語です。",
         "インデントによってブロックを表現します。",
         "様々なライブラリが豊富に用意されています。"
-      ]
+      ],
+      difficulty: "easy",
     })
   }
 }

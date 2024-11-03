@@ -24,7 +24,8 @@ export default class RustLanguage extends Language {
         "Mozillaによって開発されたシステムプログラミング言語です。",
         "メモリ安全性・並行性・パフォーマンスを重視して設計されています。",
         "Rustaceanというカニがマスコットです。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

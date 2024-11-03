@@ -35,7 +35,8 @@ export default class LispLanguage extends Language {
       hints: [
         "関数型プログラミング言語の一つです。",
         "リスト構造を持ち、再帰的な処理が得意です。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

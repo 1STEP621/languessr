@@ -15,7 +15,8 @@ export default class COBOLLanguage extends Language {
       hints: [
         "ビジネスアプリケーション開発に使われるプログラミング言語です。",
         "古くから銀行などの信頼性が求められるシステムで使われています。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }
