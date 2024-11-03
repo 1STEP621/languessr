@@ -9,6 +9,8 @@ import CsharpLanguage from "./assets/languages/csharp";
 import DLanguage from "./assets/languages/d";
 import DartLanguage from "./assets/languages/dart";
 import FishLanguage from "./assets/languages/fish";
+import FORTRANLanguage from "./assets/languages/fortran";
+import FSharpLanguage from "./assets/languages/fsharp";
 import GoLanguage from "./assets/languages/go";
 import HaskellLanguage from "./assets/languages/haskell";
 import HaxeLanguage from "./assets/languages/haxe";
@@ -19,6 +21,7 @@ import JuliaLanguage from "./assets/languages/julia";
 import KAGLanguage from "./assets/languages/kag";
 import KotlinLanguage from "./assets/languages/kotlin";
 import LispLanguage from "./assets/languages/lisp";
+import LuaLanguage from "./assets/languages/lua";
 import NadeshikoLanguage from "./assets/languages/nadeshiko";
 import OCamlLanguage from "./assets/languages/ocaml";
 import PerlLanguage from "./assets/languages/perl";
@@ -34,12 +37,15 @@ export default [
   AiScriptLanguage,
   BashLanguage,
   BrainfuckLanguage,
+  CLanguage,
   COBOLLanguage,
   CppLanguage,
   CsharpLanguage,
-  DLanguage,
   DartLanguage,
+  DLanguage,
   FishLanguage,
+  FORTRANLanguage,
+  FSharpLanguage,
   GoLanguage,
   HaskellLanguage,
   HaxeLanguage,
@@ -47,18 +53,18 @@ export default [
   JavaLanguage,
   JavaScriptLanguage,
   JuliaLanguage,
+  KAGLanguage,
+  KotlinLanguage,
+  LispLanguage,
+  LuaLanguage,
+  NadeshikoLanguage,
+  OCamlLanguage,
+  PerlLanguage,
   PHPLanguage,
   PythonLanguage,
   RubyLanguage,
   RustLanguage,
   ScalaLanguage,
   SwiftLanguage,
-  KAGLanguage,
-  KotlinLanguage,
-  LispLanguage,
-  OCamlLanguage,
-  PerlLanguage,
   TypstLanguage,
-  NadeshikoLanguage,
-  CLanguage,
 ].map(c => new c() as Language);
