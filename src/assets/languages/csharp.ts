@@ -43,7 +43,8 @@ class Program {
       hints: [
         "Microsoftによって開発されたプログラミング言語です。",
         ".NET Framework上で動作します。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

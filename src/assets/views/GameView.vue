@@ -20,6 +20,8 @@ const gameDuration = 1000 * 60;
 const hintDuration = 1000 * 5;
 const waitDuration = 1000;
 
+const difficulties = ["easy", "normal", "hard"] satisfies typeof game.difficulty[];
+
 const correct = new Audio("/correct.mp3");
 const incorrect = new Audio("/incorrect.mp3");
 const finish = new Audio("/finish.mp3");
@@ -61,7 +63,7 @@ async function newQuiz() {
 
   console.log(`[${Math.floor(performance.now() / 1000)}sec] New quiz issued`);
 
-  const language = pickElementByRandom(Languages, [prevLanguage]);
+  const language = pickElementByRandom(Languages.filter(e => difficulties.slice(0, difficulties.indexOf(game.difficulty) + 1).includes(e.difficulty)), [prevLanguage]);
   const choices = shuffleArray([...shuffleArray([...Languages]).filter(l => l !== language).slice(0, 3), language]);
   languageRef.value = language;
   choicesRef.value = choices;
@@ -129,7 +131,7 @@ onMounted(() => {
     right: () => answer(choicesRef.value[1]),
     down: () => answer(choicesRef.value[2]),
     left: () => answer(choicesRef.value[3]),
-    a: () => {},
+    a: () => { },
   };
 
   // NOTE: カウントダウンをセットアップする

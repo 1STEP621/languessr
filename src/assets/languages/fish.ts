@@ -3,7 +3,7 @@ import { Language } from "./base";
 export default class FishLanguage extends Language {
   public constructor() {
     super({
-      displayName: "Fish",
+      displayName: "><> (Fish)",
       highlightType: null,
       programs: [
 `"Hello, world!"0r>o:?v;
@@ -17,7 +17,8 @@ v>1+:aa*=?v:3%1&?!/:5%?v
       hints: [
         "スタックベースの難解プログラミング言語です。",
         ">, ^, <, vの4つの記号を使ってプログラムを移動する命令があるのが特徴です。",
-      ]
+      ],
+      difficulty: "easy",
     })
   }
 }

@@ -22,7 +22,8 @@ export default class BrainfuckLanguage extends Language {
       hints: [
         "命令が全部で8つしかない難解プログラミング言語の一種です。",
         "1993年にUrban Müllerによって開発されました。"
-      ]
+      ],
+      difficulty: "easy",
     })
   }
 }

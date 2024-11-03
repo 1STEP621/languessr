@@ -24,7 +24,8 @@ export default class KAGLanguage extends Language {
         "ノベルゲームにおいてトップクラスに使用されている言語です。",
         "非プログラマが理解しやすく、簡単に書けるように設計されています。",
         "JavaScript ライクな言語である TJS を埋め込むことができます。"
-      ]
+      ],
+      difficulty: "hard",
     })
   }
 }

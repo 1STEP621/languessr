@@ -18,6 +18,7 @@ else i
         "JavaScript上で動作する軽量スクリプト言語です。",
         "しゅいろによって開発されました。"
       ],
+      difficulty: "normal"
     })
   }
 }

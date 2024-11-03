@@ -37,7 +37,8 @@ let main argv =
         ".NET Framework上で動作する関数型プログラミング言語です。",
         "Microsoftによって開発されました。",
         "C#との相互運用性を持ちます。",
-      ]
+      ],
+      difficulty: "hard",
     })
   }
 }

@@ -25,7 +25,8 @@ export default class DartLanguage extends Language {
         "Googleによって開発されたオブジェクト指向プログラミング言語です。",
         "もともとはJavaScriptの代替言語(AltJS)として開発されました。",
         "Flutterなどによるスマホアプリケーション開発に使われます。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

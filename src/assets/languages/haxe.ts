@@ -21,7 +21,8 @@ export default class HaxeLanguage extends Language {
       hints: [
         "JavaScriptの代替言語(AltJS)の一種で、オブジェクト指向・関数型の言語です。",
         "C++, Java, Luaなど、様々なターゲットにコンパイルできることが有名です。"
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

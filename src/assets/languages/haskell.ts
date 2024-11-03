@@ -38,7 +38,8 @@ primes = filter isPrime [2..]`
       hints: [
         "純粋関数型プログラミング言語です。",
         "関数型プログラミングの特徴である高階関数や型推論を持っています。",
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }

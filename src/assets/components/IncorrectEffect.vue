@@ -5,10 +5,7 @@ const props = defineProps<{
   onAnimationEnd: () => void
 }>();
 
-const elementRef = ref<HTMLElement | null>(null);
-
 onMounted(() => {
-  const element = elementRef.value!;
   setTimeout(() => {
     props.onAnimationEnd();
   }, 500);

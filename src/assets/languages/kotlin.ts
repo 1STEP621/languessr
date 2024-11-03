@@ -41,7 +41,8 @@ fun main() {
       hints: [
         "Androidアプリケーション開発に使われるプログラミング言語です。",
         "JetBrainsによって開発されました。",
-      ]
+      ],
+      difficulty: "hard",
     })
   }
 }

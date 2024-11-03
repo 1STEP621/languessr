@@ -3,7 +3,7 @@ import { Language } from "./base";
 export default class DLanguage extends Language {
   public constructor() {
     super({
-      displayName: "D",
+      displayName: "D言語",
       highlightType: "d",
       programs: [
         `import std.stdio;
@@ -30,7 +30,8 @@ void main() {
       hints: [
         "C言語をベースにメモリ安全を目指したプログラミング言語です。",
         "強い静的型付けを持ちます。"
-      ]
+      ],
+      difficulty: "normal",
     })
   }
 }
