@@ -24,6 +24,7 @@ import LispLanguage from "./assets/languages/lisp";
 import LuaLanguage from "./assets/languages/lua";
 import NadeshikoLanguage from "./assets/languages/nadeshiko";
 import OCamlLanguage from "./assets/languages/ocaml";
+import OokLanguage from "./assets/languages/ook";
 import PerlLanguage from "./assets/languages/perl";
 import PHPLanguage from "./assets/languages/php";
 import PythonLanguage from "./assets/languages/python";
@@ -59,6 +60,7 @@ export default [
   LuaLanguage,
   NadeshikoLanguage,
   OCamlLanguage,
+  OokLanguage,
   PerlLanguage,
   PHPLanguage,
   PythonLanguage,
