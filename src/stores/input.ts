@@ -14,7 +14,7 @@ function withResolvers<T>() {
   };
 }
 
-export type KeyType = "up" | "left" | "right" | "down" | "a";
+export type KeyType = "up" | "left" | "right" | "down" | "a" | "home";
 
 export const useInputStore = defineStore("input", () => {
   let resolvers = withResolvers<string>();
@@ -26,6 +26,7 @@ export const useInputStore = defineStore("input", () => {
     down: () => {},
     left: () => {},
     a: () => {},
+    home: () => {},
   });
 
   function press(value: string) {

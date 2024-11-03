@@ -132,6 +132,11 @@ onMounted(() => {
     down: () => answer(choicesRef.value[2]),
     left: () => answer(choicesRef.value[3]),
     a: () => { },
+    home: () => {
+      game.score = 0;
+      game.difficulty = "easy";
+      view.state = "title";
+    },
   };
 
   // NOTE: カウントダウンをセットアップする

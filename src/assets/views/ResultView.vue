@@ -41,6 +41,7 @@ onMounted(() => {
     down() { },
     left() { },
     a() { },
+    home() { },
   };
   setTimeout(() => {
     if (view.state === "result") {

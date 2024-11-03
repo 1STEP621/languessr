@@ -15,7 +15,8 @@ const definedKeys = [
   ref<string | null | undefined>(undefined),
   ref<string | null | undefined>(undefined),
   ref<string | null | undefined>(undefined),
-  ref<string | null | undefined>(undefined)
+  ref<string | null | undefined>(undefined),
+  ref<string | null | undefined>(undefined),
 ];
 
 onMounted(async () => {
@@ -40,6 +41,7 @@ onMounted(async () => {
   input.keys.set(definedKeys[2].value!, "left");
   input.keys.set(definedKeys[3].value!, "right");
   input.keys.set(definedKeys[4].value!, "a");
+  input.keys.set(definedKeys[5].value!, "home");
   progressBarRef.value?.startCountdown(3000);
 });
 
@@ -94,6 +96,10 @@ function getKeyNameFromIndex(index: number) {
           <tr>
             <td>決定</td>
             <td v-html="getKeyNameFromIndex(4)" />
+          </tr>
+          <tr>
+            <td>ホーム</td>
+            <td v-html="getKeyNameFromIndex(5)" />
           </tr>
         </tbody>
       </table>
@@ -166,7 +172,7 @@ function getKeyNameFromIndex(index: number) {
   td:first-of-type {
     padding-right: 1em;
 
-    width: 4em;
+    width: auto;
   }
 
   td:last-of-type {

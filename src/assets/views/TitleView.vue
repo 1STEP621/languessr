@@ -21,6 +21,7 @@ onMounted(() => {
     down: downDifficulty,
     left: () => {},
     a: startGame,
+    home: () => {},
   };
 });
 const game = useGameStore();
