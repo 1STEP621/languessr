@@ -6,8 +6,8 @@ export default class FishLanguage extends Language {
       displayName: "><> (Fish)",
       highlightType: null,
       programs: [
-`"Hello, world!"0r>o:?v;
-                 ^   <`,
+`0"!dlroW ,olleH">o:?v;
+                ^   <`,
 `0v       ^ "Fizz"1<
 v>1+:aa*=?v:3%1&?!/:5%?v
 \0"zzuB" v;v   n?&:?&:&<
