@@ -41,7 +41,7 @@ export const useInputStore = defineStore("input", () => {
   addEventListener("keydown", evt => press(evt.key));
 
   // NOTE: ゲームパッドの検知
-  function frame() {
+  setInterval(() => {
     const gamepads = navigator.getGamepads();
     const gamepad = gamepads.find(g => g?.buttons.some(b => !b.touched)) ?? null;
     if (gamepad) {
@@ -62,9 +62,7 @@ export const useInputStore = defineStore("input", () => {
         }
       }
     }
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
+  }, 1000 / 60);
 
   return {
     async wait(): Promise<string> {
