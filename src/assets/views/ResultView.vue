@@ -52,8 +52,7 @@ onMounted(() => {
 
 function restart() {
   jsConfetti.destroyCanvas();
-  game.score = 0;
-  game.difficulty = 'easy';
+  game.$reset();
   view.state = 'title';
 }
 </script>

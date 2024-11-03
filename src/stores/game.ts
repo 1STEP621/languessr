@@ -6,5 +6,10 @@ export const useGameStore = defineStore("game", () => {
 
   const difficulty = ref<"easy" | "normal" | "hard">("easy");
 
-  return { score, difficulty };
+  function $reset() {
+    score.value = 0;
+    difficulty.value = "easy";
+  }
+
+  return { score, difficulty, $reset };
 });

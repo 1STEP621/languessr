@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { createApp, onMounted, ref } from 'vue';
+import { createApp, onMounted, onUnmounted, ref } from 'vue';
 import { pickElementByRandom, shuffleArray } from '@/utils/random';
 import Languages from '../../languages';
 import type { Language } from '../languages/base';
@@ -38,6 +38,7 @@ const hintRef = ref("");
 let quizStartTime = 0;
 
 let hintInterval = 0;
+let finishTimeout = 0;
 
 let prevLanguage: Language;
 
@@ -133,21 +134,25 @@ onMounted(() => {
     left: () => answer(choicesRef.value[3]),
     a: () => { },
     home: () => {
-      game.score = 0;
-      game.difficulty = "easy";
+      game.$reset();
       view.state = "title";
     },
   };
 
   // NOTE: カウントダウンをセットアップする
   progressRef.value?.startCountdown(gameDuration);
-  setTimeout(() => {
+  finishTimeout = setTimeout(() => {
     finish.play();
     view.state = "result";
   }, gameDuration);
 
   // NOTE: ゲームを開始する
   newQuiz();
+});
+
+onUnmounted(() => {
+  if (hintInterval) clearTimeout(hintInterval);
+  if (finishTimeout) clearTimeout(finishTimeout);
 });
 </script>
 
