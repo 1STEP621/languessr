@@ -3,7 +3,7 @@ import { Language } from "./base";
 export default class FishLanguage extends Language {
   public constructor() {
     super({
-      displayName: "Fish",
+      displayName: "><> (Fish)",
       highlightType: null,
       programs: [
 `"Hello, world!"0r>o:?v;

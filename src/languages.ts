@@ -2,6 +2,7 @@ import AiScriptLanguage from "./assets/languages/aiscript";
 import type { Language } from "./assets/languages/base";
 import BashLanguage from "./assets/languages/bash";
 import BrainfuckLanguage from "./assets/languages/brainfuck";
+import CLanguage from "./assets/languages/c";
 import COBOLLanguage from "./assets/languages/cobol";
 import CppLanguage from "./assets/languages/cpp";
 import CsharpLanguage from "./assets/languages/csharp";
@@ -18,6 +19,7 @@ import JuliaLanguage from "./assets/languages/julia";
 import KAGLanguage from "./assets/languages/kag";
 import KotlinLanguage from "./assets/languages/kotlin";
 import LispLanguage from "./assets/languages/lisp";
+import NadeshikoLanguage from "./assets/languages/nadeshiko";
 import OCamlLanguage from "./assets/languages/ocaml";
 import PerlLanguage from "./assets/languages/perl";
 import PHPLanguage from "./assets/languages/php";
@@ -57,4 +59,6 @@ export default [
   OCamlLanguage,
   PerlLanguage,
   TypstLanguage,
+  NadeshikoLanguage,
+  CLanguage,
 ].map(c => new c() as Language);
