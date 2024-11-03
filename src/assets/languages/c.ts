@@ -9,7 +9,7 @@ export default class CLanguage extends Language {
 `#include <stdio.h>
 
 int main() {
-    printf("Hello, World!\n");
+    printf("Hello, World!\\n");
     return 0;
 }`,
 `#include <stdio.h>
@@ -17,13 +17,13 @@ int main() {
 int main() {
     for (int i = 1; i <= 100; i++) {
         if (i % 3 == 0 && i % 5 == 0)
-            printf("FizzBuzz\n");
+            printf("FizzBuzz\\n");
         else if (i % 3 == 0)
-            printf("Fizz\n");
+            printf("Fizz\\n");
         else if (i % 5 == 0)
-            printf("Buzz\n");
+            printf("Buzz\\n");
         else
-            printf("%d\n", i);
+            printf("%d\\n", i);
     }
     return 0;
 }`,
